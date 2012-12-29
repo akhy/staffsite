@@ -7,6 +7,13 @@ function css($name)
 	return '<link rel="stylesheet" type="text/css" href="'.$url.'"/>';
 }
 
+function less($name)
+{
+	$url = base_url().$name;
+	
+	return '<link rel="stylesheet/less" type="text/css" href="'.$url.'"/>';
+}
+
 function js($name)
 {
 	$url = base_url().$name;
