@@ -22,6 +22,14 @@ class Staff extends DataMapper
 		return $result;
 	}
 
+	public function links()
+	{
+		$l = new Link;
+		$result = $l->where('staff_id', $this->id)->get();
+
+		return $result;
+	}
+
 
 	// =======================================================
 	//  URL HANDLING
