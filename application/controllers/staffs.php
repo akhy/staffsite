@@ -27,12 +27,17 @@ class Staffs extends MY_Controller {
 		$s = new Staff;
 		$staff = $s->where('username', $username)->get();
 
-		$this->twiggy->template('home')
-			->set('active', 'home')
-			->title($staff->fullname)
-				->append(SITE_TITLE)
-			->set('staff', $staff)
-			->display();
+		if( ! $staff->exists() ) :
+			$this->twiggy->template('404')->display();
+
+		else :
+			$this->twiggy->template('home')
+				->set('active', 'home')
+				->title($staff->fullname)
+					->append(SITE_TITLE)
+				->set('staff', $staff)
+				->display();
+		endif;
 	}
 
 	/**
@@ -42,13 +47,18 @@ class Staffs extends MY_Controller {
 	{
 		$s = new Staff;
 		$staff = $s->where('username', $username)->get();
+		
+		if( ! $staff->exists() ) :
+			$this->twiggy->template('404')->display();
 
-		$this->twiggy->template('profile')
-			->set('active', 'profile')
-			->title($staff->fullname)
-				->append(SITE_TITLE)
-			->set('staff', $staff)
-			->display();
+		else :
+			$this->twiggy->template('profile')
+				->set('active', 'profile')
+				->title($staff->fullname)
+					->append(SITE_TITLE)
+				->set('staff', $staff)
+				->display();
+		endif;
 	}
 
 	/**
@@ -63,14 +73,19 @@ class Staffs extends MY_Controller {
 		$s = new Staff;
 		$staff = $s->where('username', $username)->get();
 
-		$this->twiggy->template('blog')
-			->set('active', 'blog')
-			->title('Blog Page '.$page)
-				->append($staff->fullname)
-				->append(SITE_TITLE)
-			->set('page', $page)
-			->set('staff', $staff)
-			->display();
+		if( ! $staff->exists() ) :
+			$this->twiggy->template('404')->display();
+
+		else :
+			$this->twiggy->template('blog')
+				->set('active', 'blog')
+				->title('Blog Page '.$page)
+					->append($staff->fullname)
+					->append(SITE_TITLE)
+				->set('page', $page)
+				->set('staff', $staff)
+				->display();
+		endif;
 	}
 
 	/**
@@ -82,15 +97,20 @@ class Staffs extends MY_Controller {
 		$staff = $s->where('username', $username)->get();
 		$files = $staff->files()->get_paged($page, 10);
 
-		$this->twiggy->template('download')
-			->set('active', 'download')
-			->title('Unduh File page '.$page)
-				->append($staff->fullname)
-				->append(SITE_TITLE)
-			->set('page', $page)
-			->set('staff', $staff)
-			->set('files', $files)
-			->display();
+		if( ! $staff->exists() ) :
+			$this->twiggy->template('404')->display();
+
+		else :
+			$this->twiggy->template('download')
+				->set('active', 'download')
+				->title('Unduh File page '.$page)
+					->append($staff->fullname)
+					->append(SITE_TITLE)
+				->set('page', $page)
+				->set('staff', $staff)
+				->set('files', $files)
+				->display();
+		endif;
 	}
 
 	/**
