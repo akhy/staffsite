@@ -49,8 +49,9 @@ $dbpath = APPPATH.'config/db/'.ENVIRONMENT.'.php';
 
 if( ! is_file($dbpath) )
 	exit("Database configuration is not exist. Please check file <strong>`$dbpath`</strong>");
+else
+	$conn = include ($dbpath);
 
-require_once( $dbpath );
 
 $active_group = 'default';
 $active_record = TRUE;
