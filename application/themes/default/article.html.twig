@@ -1,0 +1,34 @@
+{% extends _layout %}
+
+{% block content %}
+
+	{% set articles = staff.articles().get_paged(page, 10) %}
+
+	<h2>Artikel Blog</h2>
+
+	<div>
+		Page {{ page }} of {{ articles.paged.total_pages }} &mdash; 
+
+		&laquo;
+		{% for i in range(1, articles.paged.total_pages) %}
+		    [{{ i }}] 
+		{% endfor %}
+		&raquo;
+	</div>
+	
+	{% for article in articles %}
+		<h4>
+			{{ anchor(article.url(), article.title) }}
+		</h4>
+
+		<small><em>Ditulis pada {{ article.created() }}</em></small>
+		<p>
+			{{ word_limiter(article.content, 50) }} <a href="#">Baca Selengkapnya &raquo;</a>
+		</p>
+	{% endfor %}
+
+{% endblock %}
+
+{% block sidebar %}
+	{% include '_parts/side_profile.html.twig' %}
+{% endblock %}

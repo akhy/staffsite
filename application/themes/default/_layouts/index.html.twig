@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<title>{{ title }}</title>
+		{{ css('lib/bootstrap/css/bootstrap.min.css') }}
+		{{ less('less/default.less') }}
+		{{ js('js/less.js') }}
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<div id="header"></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="span12">
+					{% include '_parts/navbar.html.twig' %}
+				</div>
+			</div>
+
+			<div id="main" class="row">
+				<div id="content" class="span9">
+					<div class="padding">
+						{% block content %}{% endblock %}
+					</div>
+				</div>
+				<div id="sidebar" class="span3">
+					<div class="padding-side">
+					{% block sidebar %}{% endblock %}
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div id="footer" class="span12">
+					&copy; Copyright 2013 <br/>
+					Jurusan Teknik Informatika Fakultas Teknologi Industri<br/>
+					Universitas Islam Indonesia
+				</div>
+			</div>
+		</div>
+		{{ js('js/holder.js') }}
+		{{ js('lib/jquery/jquery-1.7.1.min.js') }}
+		{{ js('lib/bootstrap/js/bootstrap.min.js') }}
+
+		<script type="text/javascript">
+			$(function(){
+				$('#navbar-{{ active }}').addClass('active');
+			});
+		</script>
+	</body>
+</html>

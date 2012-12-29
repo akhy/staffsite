@@ -1,0 +1,27 @@
+{% extends _layout %}
+
+{% block content %}
+
+	{% for article in staff.articles().get_paged(1, 10) %}
+		<h4>
+			{{ anchor(article.url(), article.title) }}
+		</h4>
+
+		<small><em>Ditulis pada {{ article.created() }}</em></small>
+		<p>
+			{{ word_limiter(article.content, 50) }} {{ anchor(article.url, 'Baca Selengkapnya &raquo;') }}
+		</p>
+	{% endfor %}
+
+	<hr>
+
+	<h5>File Terbaru</h5>
+	{% for file in staff.files().get_paged(1, 5) %}
+		{% include '_parts/block_file.html.twig' %}
+	{% endfor %}
+
+{% endblock %}
+
+{% block sidebar %}
+	{% include '_parts/side_profile.html.twig' %}
+{% endblock %}
