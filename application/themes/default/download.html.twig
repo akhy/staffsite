@@ -4,7 +4,9 @@
 
 	{% set files = staff.files().get_paged(page, 10) %}
 
-	<h3>File Terbaru</h3>
+	<div class="page-header">
+		<h3>File Terbaru</h3>
+	</div>
 
 	<div>
 		Page {{ page }} of {{ files.paged.total_pages }} &mdash; 
