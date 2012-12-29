@@ -192,7 +192,7 @@ $config['twiggy']['default_template'] = 'index';
 
 $config['twiggy']['register_functions'] = array
 (
-
+	'base_url', 'css', 'less', 'js', 'anchor', 'date'
 );
 
 

@@ -1,0 +1,11 @@
+	<div class="media">
+		<a class="pull-left" href="{{ base_url() ~ file.url() }}">
+			<img class="media-object" src="{{ base_url() ~ file.image_url }}" width="64" height="64">
+		</a>
+		<div class="media-body">
+			<h4 class="media-heading">{{ anchor(file.url, file.title) }}</h4>
+			<div class="media">
+				{{ file.content }}
+			</div>
+		</div>
+	</div>

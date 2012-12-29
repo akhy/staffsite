@@ -1,0 +1,16 @@
+
+<img class="thumbnail" width="160" src="{{ staff.picture_url() }}">
+
+<h6>
+{{ anchor(staff.home_url(), staff.fullname) }}
+</h6>
+
+<p class="small">
+	{{ staff.bio }}
+</p>
+
+{% include '_parts/links.html.twig' %}
+
+<p>
+{{ anchor(staff.profile_url(), 'Selengkapnya &raquo;') }}
+</p>

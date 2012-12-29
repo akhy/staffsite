@@ -1,0 +1,35 @@
+{% extends _layout %}
+
+{% block content %}
+<div class="page-header">
+	<h3>{{ staff.fullname }}</h3>
+</div>
+
+<dl>
+	<dt>Posisi</dt>
+	<dd>{{ staff.position }}</dd>
+
+	<dt>Nomor Induk</dt>
+	<dd>{{ staff.nip }}</dd>
+
+	<dt>Tempat, Tanggal Lahir</dt>
+	<dd>{{ staff.pob }}, {{ staff.dob }}</dd>
+
+	<dt>Alamat</dt>
+	<dd>{{ staff.address }}</dd>
+
+	<dt>E-mail</dt>
+	<dd>{{ staff.email }}</dd>
+
+	<dt>Aktifitas</dt>
+	<dd>{{ staff.activity }}</dd>
+
+	<dt>Riset</dt>
+	<dd>{{ staff.research }}</dd>
+</dl>
+
+{% endblock %}
+
+{% block sidebar %}
+	{% include '_parts/side_profile.html.twig' %}
+{% endblock %}

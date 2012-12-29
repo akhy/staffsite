@@ -1,0 +1,13 @@
+<div class="navbar">
+	<div class="navbar-inner">
+	<ul class="nav">
+		<li id="navbar-home">{{ anchor(staff.username, '<i class="icon-home"></i> Home</a>') }}</li>
+		<li id="navbar-blog">{{ anchor(staff.username ~ '/blog', '<i class="icon-book"></i> Artikel Blog</a>') }}</li>
+		<li id="navbar-download">{{ anchor(staff.username ~ '/download', '<i class="icon-download"></i> Unduh File</a>') }}</li>
+		<li id="navbar-profile">{{ anchor(staff.username ~ '/profile', '<i class="icon-user"></i> Profil</a>') }}</li>
+	</ul>
+	<form class="navbar-form pull-right">
+		<input type="text" class="span3" placeholder="Search..." />
+	</form>
+	</div>
+</div>

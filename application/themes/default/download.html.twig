@@ -1,0 +1,27 @@
+{% extends _layout %}
+
+{% block content %}
+
+	{% set files = staff.files().get_paged(page, 10) %}
+
+	<h3>File Terbaru</h3>
+
+	<div>
+		Page {{ page }} of {{ files.paged.total_pages }} &mdash; 
+
+		&laquo;
+		{% for i in range(1, files.paged.total_pages) %}
+		    [{{ i }}] 
+		{% endfor %}
+		&raquo;
+	</div>
+
+	{% for file in files %}
+		{% include '_parts/block_file.html.twig' %}
+	{% endfor %}
+
+{% endblock %}
+
+{% block sidebar %}
+	{% include '_parts/side_profile.html.twig' %}
+{% endblock %}

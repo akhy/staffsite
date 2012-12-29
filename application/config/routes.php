@@ -42,5 +42,18 @@ $route['default_controller'] = "welcome";
 $route['404_override'] = '';
 
 
+$route['(:any)/download']              = 'staffs/download/$1/1';
+$route['(:any)/download/(:num)']       = 'staffs/download/$1/$2';
+
+$route['(:any)/blog']                  = 'staffs/blog/$1/1';
+$route['(:any)/blog/(:num)']           = 'staffs/blog/$1/$2';
+
+$route['(:any)/article/(:num)-(:any)'] = 'staffs/article/$2/$3';
+
+$route['(:any)/profile']               = 'staffs/profile/$1';
+
+$route['(:any)']                       = 'staffs/index/$1';
+
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
