@@ -5,20 +5,20 @@ class Staffs extends MY_Controller {
 	/**
 	 * Index Page for this controller.
 	 */
-	public function index($username)
+	public function get_index($username)
 	{
 		if( $this->uri->segment(1) == 'staffs' )
 		{
 			redirect('/');
 		}
 
-		$this->home($username);
+		$this->get_home($username);
 	}
 
 	/**
 	 * Show a staff's overview
 	 */
-	public function home($username)
+	public function get_home($username)
 	{
 		// Load needed
 		$this->load->helper('text');
@@ -43,7 +43,7 @@ class Staffs extends MY_Controller {
 	/**
 	 * Show a staff's profile
 	 */
-	public function profile($username)
+	public function get_profile($username)
 	{
 		$s = new Staff;
 		$staff = $s->where('username', $username)->get();
@@ -64,7 +64,7 @@ class Staffs extends MY_Controller {
 	/**
 	 * Show all blog articles
 	 */
-	public function blog($username, $page = 1)
+	public function get_blog($username, $page = 1)
 	{
 		// Load needed
 		$this->load->helper('text');
@@ -91,7 +91,7 @@ class Staffs extends MY_Controller {
 	/**
 	 * Show all shared files
 	 */
-	public function download($username, $page = 1)
+	public function get_download($username, $page = 1)
 	{
 		$s = new Staff;
 		$staff = $s->where('username', $username)->get();
@@ -116,7 +116,7 @@ class Staffs extends MY_Controller {
 	/**
 	 * Show a specific article
 	 */
-	public function article($id, $slug)
+	public function get_article($id, $slug)
 	{
 		$a = new Article;
 		$article  = $a->where('id', $id)->get();
