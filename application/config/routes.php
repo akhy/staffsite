@@ -38,20 +38,29 @@
 |
 */
 
-$route['default_controller'] = "welcome";
+$route['default_controller'] = "staffs";
 $route['404_override'] = '';
 
+// Auth
+$route['login']  = 'auth/login';
+$route['logout'] = 'auth/logout';
+$route['forget'] = 'auth/forget';
 
+// Backend
+$route['admin']         = 'admin/index';
+$route['admin/profile'] = 'admin/profile';
+$route['admin/article'] = 'admin/article';
+$route['admin/file']    = 'admin/file';
+
+// Frontend
 $route['(:any)/download']              = 'staffs/download/$1/1';
 $route['(:any)/download/(:num)']       = 'staffs/download/$1/$2';
-
 $route['(:any)/blog']                  = 'staffs/blog/$1/1';
 $route['(:any)/blog/(:num)']           = 'staffs/blog/$1/$2';
-
-$route['(:any)/article/(:num)-(:any)'] = 'staffs/article/$2/$3';
-
+$route['(:any)/article/(:num)-(:any)'] = 'staffs/article/$1/$2/$3';
 $route['(:any)/profile']               = 'staffs/profile/$1';
 
+// Else
 $route['(:any)']                       = 'staffs/index/$1';
 
 

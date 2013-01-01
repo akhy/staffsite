@@ -2,14 +2,37 @@
 
 class Staffs extends MY_Controller {
 
+
+	/**
+	 * Inject global Twig variable
+	 * - staff: Logged in staff data
+	 */
+	private function view($template, $username)
+	{
+		$staff = Staff::init()->by_username($username);
+
+		if( ! $staff->exists() )
+		{
+			$this->twiggy->template('404')->display();
+			exit;
+		}
+
+		return $this->twiggy
+			->template($template)
+			->set('staff', $staff)
+			->title($staff->fullname)
+				->append(SITE_TITLE);
+	}
+
 	/**
 	 * Index Page for this controller.
 	 */
-	public function get_index($username)
+	public function get_index($username = null)
 	{
 		if( $this->uri->segment(1) == 'staffs' )
 			redirect('/');
 
+		if( ! empty($username) )
 		$this->get_home($username);
 	}
 
@@ -17,25 +40,14 @@ class Staffs extends MY_Controller {
 	 * Show a staff's overview
 	 */
 	public function get_home($username)
-	{
+	{	
 		// Load needed
 		$this->load->helper('text');
 		$this->twiggy->register_function('word_limiter');
 
-		$s = new Staff;
-		$staff = $s->by_username($username);
-
-		if( ! $staff->exists() ) :
-			$this->twiggy->template('404')->display();
-
-		else :
-			$this->twiggy->template('home')
-				->set('active', 'home')
-				->title($staff->fullname)
-					->append(SITE_TITLE)
-				->set('staff', $staff)
-				->display();
-		endif;
+		$this->view('home', $username)
+			->set('active', 'home')
+			->display();
 	}
 
 	/**
@@ -43,20 +55,9 @@ class Staffs extends MY_Controller {
 	 */
 	public function get_profile($username)
 	{
-		$s = new Staff;
-		$staff = $s->by_username($username);
-		
-		if( ! $staff->exists() ) :
-			$this->twiggy->template('404')->display();
-
-		else :
-			$this->twiggy->template('profile')
-				->set('active', 'profile')
-				->title($staff->fullname)
-					->append(SITE_TITLE)
-				->set('staff', $staff)
-				->display();
-		endif;
+		$this->view('profile', $username)
+			->set('active', 'profile')
+			->display();
 	}
 
 	/**
@@ -64,26 +65,15 @@ class Staffs extends MY_Controller {
 	 */
 	public function get_blog($username, $page = 1)
 	{
-		// Load needed
+		// Load needed helper and register as Twiggy function
 		$this->load->helper('text');
 		$this->twiggy->register_function('word_limiter');
 
-		$s = new Staff;
-		$staff = $s->by_username($username);
-
-		if( ! $staff->exists() ) :
-			$this->twiggy->template('404')->display();
-
-		else :
-			$this->twiggy->template('blog')
-				->set('active', 'blog')
-				->title('Blog Page '.$page)
-					->append($staff->fullname)
-					->append(SITE_TITLE)
-				->set('page', $page)
-				->set('staff', $staff)
-				->display();
-		endif;
+		$this->view('blog', $username)
+			->set('active', 'blog')
+			->set('page', $page)
+			->prepend('Artikel halaman '.$page)
+			->display();
 	}
 
 	/**
@@ -91,47 +81,27 @@ class Staffs extends MY_Controller {
 	 */
 	public function get_download($username, $page = 1)
 	{
-		$s = new Staff;
-		$staff = $s->by_username($username);
-		$files = $staff->files()->get_paged($page, 10);
-
-		if( ! $staff->exists() ) :
-			$this->twiggy->template('404')->display();
-
-		else :
-			$this->twiggy->template('download')
-				->set('active', 'download')
-				->title('Unduh File page '.$page)
-					->append($staff->fullname)
-					->append(SITE_TITLE)
-				->set('page', $page)
-				->set('staff', $staff)
-				->set('files', $files)
-				->display();
-		endif;
+		$this->view('download', $username)
+			->set('active', 'download')
+			->set('page', $page)
+			->prepend('File halaman '.$page)
+			->display();
 	}
 
 	/**
 	 * Show a specific article
 	 */
-	public function get_article($id, $slug)
+	public function get_article($username, $id, $slug)
 	{
-		$a = new Article;
-		$article  = $a->where('id', $id)->get();
-		$staff    = $article->staff();
-		$category = $article->category();
+		$article  = Article::init()->where('id', $id)->get();
 
 		// Increment viewed
 		$article->increment();
 
-		$this->twiggy->template('article')
+		$this->view('article', $username)
 			->set('active', 'blog')
-			->title($article->title)
-				->append($staff->fullname)
-				->append(SITE_TITLE)
 			->set('article', $article)
-			->set('category', $category)
-			->set('staff', $staff)
+			->prepend($article->title)
 			->display();
 	}
 
