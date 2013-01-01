@@ -5,6 +5,9 @@
  */
 class Staff extends DataMapper
 {
+	// =======================================================
+	//  RELATIONSHIPS
+	// =======================================================
 
 	public function articles()
 	{
@@ -25,9 +28,19 @@ class Staff extends DataMapper
 	public function links()
 	{
 		$l = new Link;
-		$result = $l->where('staff_id', $this->id)->get();
+		$result = $l->where('staff_id', $this->id);
 
 		return $result;
+	}
+
+
+	// =======================================================
+	//  FETCHING DATA
+	// =======================================================
+
+	public function by_username($username)
+	{
+		return $this->where('username', $username)->get();
 	}
 
 

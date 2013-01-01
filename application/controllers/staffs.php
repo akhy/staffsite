@@ -8,9 +8,7 @@ class Staffs extends MY_Controller {
 	public function get_index($username)
 	{
 		if( $this->uri->segment(1) == 'staffs' )
-		{
 			redirect('/');
-		}
 
 		$this->get_home($username);
 	}
@@ -25,7 +23,7 @@ class Staffs extends MY_Controller {
 		$this->twiggy->register_function('word_limiter');
 
 		$s = new Staff;
-		$staff = $s->where('username', $username)->get();
+		$staff = $s->by_username($username);
 
 		if( ! $staff->exists() ) :
 			$this->twiggy->template('404')->display();
@@ -46,7 +44,7 @@ class Staffs extends MY_Controller {
 	public function get_profile($username)
 	{
 		$s = new Staff;
-		$staff = $s->where('username', $username)->get();
+		$staff = $s->by_username($username);
 		
 		if( ! $staff->exists() ) :
 			$this->twiggy->template('404')->display();
@@ -71,7 +69,7 @@ class Staffs extends MY_Controller {
 		$this->twiggy->register_function('word_limiter');
 
 		$s = new Staff;
-		$staff = $s->where('username', $username)->get();
+		$staff = $s->by_username($username);
 
 		if( ! $staff->exists() ) :
 			$this->twiggy->template('404')->display();
@@ -94,7 +92,7 @@ class Staffs extends MY_Controller {
 	public function get_download($username, $page = 1)
 	{
 		$s = new Staff;
-		$staff = $s->where('username', $username)->get();
+		$staff = $s->by_username($username);
 		$files = $staff->files()->get_paged($page, 10);
 
 		if( ! $staff->exists() ) :

@@ -1,6 +1,5 @@
 <div class="social">
-	{% for link in staff.links %}
+	{% for link in staff.links.get() %}
 		{{ anchor(link.url, img({'src': link.image_url, 'title': link.type.name, 'width': '32'} )) }}
-	    
 	{% endfor %}
 </div>
