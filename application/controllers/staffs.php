@@ -16,9 +16,12 @@ class Staffs extends MY_Controller {
 			$this->twiggy->template('404')->display();
 			exit;
 		}
+		$current = Staff::current();
 
 		return $this->twiggy
 			->template($template)
+			->set('current', $current)
+			->set('is_login', $current ? 'login' : '')
 			->set('staff', $staff)
 			->title($staff->fullname)
 				->append(SITE_TITLE);

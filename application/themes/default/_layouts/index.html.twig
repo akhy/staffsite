@@ -10,7 +10,10 @@
 		{{ less('less/default.less') }}
 		{{ js('js/less.js') }}
 	</head>
-	<body>
+	<body class="{{ is_login }}">
+		{% if current %}
+			{% include '_parts/top_userbar.html.twig' %}
+		{% endif %}
 		<div class="container">
 			<div class="row">
 				<div class="span12">

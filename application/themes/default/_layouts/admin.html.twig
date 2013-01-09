@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head>
+	<title>{{ title }}</title>
+	{{ css('lib/bootstrap/css/bootstrap.min.css') }}
+	{{ less('less/default.less') }}
+<body>
+
+	<div class="container">
+		<div class="row">
+			<div class="span12">
+				{% block content %}{% endblock %}
+			</div>
+		</div>
+	</div>
+
+	{{ js('js/holder.js') }}
+	{{ js('lib/jquery/jquery-1.7.1.min.js') }}
+	{{ js('lib/bootstrap/js/bootstrap.min.js') }}
+</body>
+</html>
