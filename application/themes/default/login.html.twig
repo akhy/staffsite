@@ -1,0 +1,30 @@
+<html>
+<head>
+	<title>Login</title>
+	{{ css('css/reset.css')}}
+	{{ css('css/login.css')}}
+</head>
+
+<body onload="document.login.username.focus();">
+	
+	<div id="container">
+		<form action="{{ base_url() }}login" method="POST" onSubmit="return validasi(this)">
+
+			<h3>LOGIN</h3>
+		
+			<label for="identity">Username/E-mail</label>
+			<input type="text" name="identity"/>
+			
+			<label for="password">Password</label>
+			<input type="password" name="password"/>
+
+			<label for="lupa"><a href="{{ base_url() }}forget">Lupa Password?</a></label>
+			
+			<div id="lower">
+				<input type="submit" value="Login">
+			</div>
+		</form>
+	</div>
+	
+</body>
+</html>

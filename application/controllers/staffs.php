@@ -2,118 +2,109 @@
 
 class Staffs extends MY_Controller {
 
+
+	/**
+	 * Inject global Twig variable
+	 * - staff: Logged in staff data
+	 */
+	private function view($template, $username)
+	{
+		$staff = Staff::init()->by_username($username);
+
+		if( ! $staff->exists() )
+		{
+			$this->twiggy->template('404')->display();
+			exit;
+		}
+		$current = Staff::current();
+
+		return $this->twiggy
+			->template($template)
+			->set('current', $current)
+			->set('is_login', $current ? 'login' : '')
+			->set('staff', $staff)
+			->title($staff->fullname)
+				->append(SITE_TITLE);
+	}
+
 	/**
 	 * Index Page for this controller.
 	 */
-	public function index($username)
+	public function get_index($username = null)
 	{
 		if( $this->uri->segment(1) == 'staffs' )
-		{
 			redirect('/');
-		}
 
-		$this->home($username);
+		if( ! empty($username) )
+		$this->get_home($username);
 	}
 
 	/**
 	 * Show a staff's overview
 	 */
-	public function home($username)
-	{
+	public function get_home($username)
+	{	
 		// Load needed
 		$this->load->helper('text');
 		$this->twiggy->register_function('word_limiter');
 
-		$s = new Staff;
-		$staff = $s->where('username', $username)->get();
-
-		$this->twiggy->template('home')
+		$this->view('home', $username)
 			->set('active', 'home')
-			->title($staff->fullname)
-				->append(SITE_TITLE)
-			->set('staff', $staff)
 			->display();
 	}
 
 	/**
 	 * Show a staff's profile
 	 */
-	public function profile($username)
+	public function get_profile($username)
 	{
-		$s = new Staff;
-		$staff = $s->where('username', $username)->get();
-
-		$this->twiggy->template('profile')
+		$this->view('profile', $username)
 			->set('active', 'profile')
-			->title($staff->fullname)
-				->append(SITE_TITLE)
-			->set('staff', $staff)
 			->display();
 	}
 
 	/**
 	 * Show all blog articles
 	 */
-	public function blog($username, $page = 1)
+	public function get_blog($username, $page = 1)
 	{
-		// Load needed
+		// Load needed helper and register as Twiggy function
 		$this->load->helper('text');
 		$this->twiggy->register_function('word_limiter');
 
-		$s = new Staff;
-		$staff = $s->where('username', $username)->get();
-
-		$this->twiggy->template('blog')
+		$this->view('blog', $username)
 			->set('active', 'blog')
-			->title('Blog Page '.$page)
-				->append($staff->fullname)
-				->append(SITE_TITLE)
 			->set('page', $page)
-			->set('staff', $staff)
+			->prepend('Artikel halaman '.$page)
 			->display();
 	}
 
 	/**
 	 * Show all shared files
 	 */
-	public function download($username, $page = 1)
+	public function get_download($username, $page = 1)
 	{
-		$s = new Staff;
-		$staff = $s->where('username', $username)->get();
-		$files = $staff->files()->get_paged($page, 10);
-
-		$this->twiggy->template('download')
+		$this->view('download', $username)
 			->set('active', 'download')
-			->title('Unduh File page '.$page)
-				->append($staff->fullname)
-				->append(SITE_TITLE)
 			->set('page', $page)
-			->set('staff', $staff)
-			->set('files', $files)
+			->prepend('File halaman '.$page)
 			->display();
 	}
 
 	/**
 	 * Show a specific article
 	 */
-	public function article($id, $slug)
+	public function get_article($username, $id, $slug)
 	{
-		$a = new Article;
-		$article  = $a->where('id', $id)->get();
-		$staff    = $article->staff();
-		$category = $article->category();
+		$article  = Article::init()->where('id', $id)->get();
 
 		// Increment viewed
 		$article->increment();
 
-		$this->twiggy->template('article')
+		$this->view('article', $username)
 			->set('active', 'blog')
-			->title($article->title)
-				->append($staff->fullname)
-				->append(SITE_TITLE)
 			->set('article', $article)
-			->set('category', $category)
-			->set('staff', $staff)
+			->prepend($article->title)
 			->display();
 	}
 

@@ -5,9 +5,34 @@
  */
 class Article extends DataMapper
 {
-	/**
-	 * Relationships
-	 */
+
+	public function __construct()
+	{
+		parent::__construct();
+
+		$this->CI = get_instance();
+	}
+
+
+	// =======================================================
+	//  STATIC METHODS
+	// =======================================================
+
+	public static function init()
+	{
+		return new Article;
+	}
+
+	public static function CI()
+	{
+		return get_instance();
+	}
+
+
+	// =======================================================
+	//  RELATIONSHIPS
+	// =======================================================
+
 	public function staff()
 	{
 		$s = new Staff;
@@ -21,9 +46,10 @@ class Article extends DataMapper
 	}
 
 
-	/**
-	 * Other functions
-	 */
+	// =======================================================
+	//  DATA HANDLING
+	// =======================================================
+
 	public function increment()
 	{
 		$this->where('id', $this->id)->update('viewed', $this->viewed + 1);
@@ -38,6 +64,11 @@ class Article extends DataMapper
 	{
 		return date('j F Y H:i', strtotime($this->updated_at));
 	}
+
+
+	// =======================================================
+	//  URL HANDLING
+	// =======================================================
 
 	public function url()
 	{

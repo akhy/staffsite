@@ -4,7 +4,9 @@
 
 	{% set articles = staff.articles().get_paged(page, 10) %}
 
-	<h2>Artikel Blog</h2>
+	<div class="page-header">
+		<h3>Artikel Blog</h3>
+	</div>
 
 	<div>
 		Page {{ page }} of {{ articles.paged.total_pages }} &mdash; 
