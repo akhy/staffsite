@@ -15,6 +15,7 @@
  * @version   			0.8.5
  * @copyright 			Copyright (c) 2012 Edmundas Kondrašovas <as@edmundask.lt>
  */
+if ( !defined('__DIR__') ) define('__DIR__', dirname(__FILE__));
 
 if(!defined('TWIGGY_ROOT')) define('TWIGGY_ROOT', dirname(__DIR__));
 
