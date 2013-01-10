@@ -30,7 +30,7 @@ class Staff extends DataMapper
 
 	public static function attempt_login($post)
 	{
-		static::CI()->session->unset_userdata('staff_id');
+		get_instance()->session->unset_userdata('staff_id');
 
 		$post['password'] = md5($post['password']);
 		$staff = Staff::init()
@@ -44,14 +44,14 @@ class Staff extends DataMapper
 		if ( ! $staff->exists() )
 			return false;
 
-		static::CI()->session->set_userdata('staff_id', $staff->id);
+		get_instance()->session->set_userdata('staff_id', $staff->id);
 
 		return $staff;
 	}
 
 	public static function current()
 	{
-		$staff_id = static::CI()->session->userdata('staff_id');
+		$staff_id = get_instance()->session->userdata('staff_id');
 
 		return $staff_id ? Staff::init()->where('id', $staff_id)->get() : false;
 	}
