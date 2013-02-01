@@ -12,6 +12,8 @@ class MY_Admin extends MY_Controller
 	public function __construct()
 	{
 		parent::__construct();
+
+		$this->load->spark('Twiggy/0.8.5');
 		
 		$this->current = Staff::current();
 		if( ! Staff::current() )
