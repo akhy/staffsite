@@ -1,0 +1,43 @@
+{% extends _layout %}
+
+{% block content %}
+
+<div class="hpad page-header">
+	<h2>Edit Profil</h2>
+</div>
+<div class="hpad">
+{{ img({'src': current.picture_url(), 'width': '100', 'class': 'thumbnaila'}) }} 
+{{ anchor('admin/profile/picture', '<i class="icon-camera"></i> Upload gambar profil', {'class': 'btn btn-mini'}) }}
+</div>
+<hr>
+
+<form class="form form-horizontal" action="{{ base_url() }}admin/profile/edit" method="post">
+	<div class="row">
+		<div class="span6">
+			{{ tw_control('nama lengkap', error.fullname, form_input('fullname', old.fullname|default(profile.fullname) )) }}
+			{{ tw_control('username', error.username, form_input('username', old.username|default(profile.username) )) }}
+			{{ tw_control('email', error.email, form_input('email', old.email|default(profile.email) )) }}
+			<hr/>
+			{{ tw_control('jenis kelamin', error.gender, form_dropdown('gender', {'f': 'Wanita', 'm': 'Pria'}, old.gender|default(profile.gender) )) }}
+			{{ tw_control('tempat lahir', error.pob, form_input('pob', old.pob|default(profile.pob) )) }}
+			{{ tw_control('tanggal lahir', error.dob, form_input('dob', old.dob|default(profile.dob) )) }}
+			{{ tw_control('alamat', error.address, form_textarea('address', old.address|default(profile.address) )) }}
+		</div>
+
+		<div class="span6">
+			{{ tw_control('posisi / jabatan', error.position, form_input('position', old.position|default(profile.position) )) }}
+			{{ tw_control('biografi singkat', error.bio, form_textarea('bio', old.bio|default(profile.bio) )) }}
+			{{ tw_control('aktifitas', error.activity, form_textarea('activity', old.activity|default(profile.activity) )) }}
+			{{ tw_control('topik riset', error.research, form_textarea('research', old.research|default(profile.research) )) }}
+
+		</div>
+	</div>
+
+	<div class="form-actions">
+		<input type="submit" value="Simpan" class="btn btn-large btn-primary"/>
+		<input type="reset" value="Reset" class="btn btn-large"/>
+	</div>
+
+</form>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends _layout %}
+
+{% block content %}
+
+<div class="hpad page-header">
+	<h2>Upload Gambar Profil</h2>
+</div>
+
+<form action="{{base_url('admin/profile/picture')}}" method="post" enctype="multipart/form-data" class="form form-horizontal">
+	<div class="controls">
+		{{ img({'src': current.picture_url(), 'width': '100', 'class': 'thumbnaila'}) }} 
+	</div>
+	<div class="control-group">
+		<label class="control-label">Gambar</label>
+		<div class="controls">
+			<input name="picture" type="file"/><br/>
+			<span class="help-block">
+				Tipe file: JPG <br>	
+				Ukuran maks 2 MB <br>
+			</span>
+		</div>
+	</div>
+	<div class="controls">
+		<input type="submit" value="Upload" class="btn btn-primary">
+		<input type="reset" value="Reset" class="btn">
+	</div>
+</form>
+
+{% endblock %}

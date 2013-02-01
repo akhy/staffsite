@@ -6,6 +6,59 @@
 class Staff extends DataMapper
 {
 
+	/**
+	 * Rules
+	 */
+	var $validation = array(
+		'fullname' => array(
+			'label' => 'Nama lengkap',
+			'rules' => array('required'),
+		),
+		'username' => array(
+			'label' => 'Username',
+			'rules' => array('required', 'unique'),
+		),
+		'email' => array(
+			'label' => 'Email Address',
+			'rules' => array('required', 'unique', 'valid_email'),
+		),
+		'gender' => array(
+			'label' => 'Jenis Kelamin',
+			'rules' => array('valid_match' => array('m', 'f')),
+		),
+		'bio' => array(
+			'label' => 'Biografi singkat',
+			'rules' => array('max_length' => 160),
+		),
+
+		'pob' => array(
+			'label' => 'Tempat Lahir',
+			'rules' => array('required', 'max_length' => 20),
+		),
+		'dob' => array(
+			'label' => 'Tempat Lahir',
+			'rules' => array('required', 'valid_date'),
+		),
+		'address' => array(
+			'label' => 'Alamat',
+			'rules' => array('max_length' => 200),
+		),
+
+		'position' => array(
+			'label' => 'Posisi/Jabatan',
+			'rules' => array('max_length' => 50),
+		),
+		'research' => array(
+			'label' => 'Riset',
+			'rules' => array('max_length' => 160),
+		),
+		'activity' => array(
+			'label' => 'Aktifitas',
+			'rules' => array('max_length' => 160),
+		),
+
+	);
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -30,7 +83,7 @@ class Staff extends DataMapper
 
 	public static function attempt_login($post)
 	{
-		static::CI()->session->unset_userdata('staff_id');
+		get_instance()->session->unset_userdata('staff_id');
 
 		$post['password'] = md5($post['password']);
 		$staff = Staff::init()
@@ -44,17 +97,32 @@ class Staff extends DataMapper
 		if ( ! $staff->exists() )
 			return false;
 
-		static::CI()->session->set_userdata('staff_id', $staff->id);
+		get_instance()->session->set_userdata('staff_id', $staff->id);
 
 		return $staff;
 	}
 
 	public static function current()
 	{
-		$staff_id = static::CI()->session->userdata('staff_id');
+		$staff_id = get_instance()->session->userdata('staff_id');
 
 		return $staff_id ? Staff::init()->where('id', $staff_id)->get() : false;
 	}
+
+	public static function upload_picture($fieldname)
+	{
+		$CI =& get_instance();
+		$CI->load->library('upload', array(
+			'upload_path'   => realpath('content/avatar'),
+			'allowed_types' => 'jpg',
+			'max_size'      => '2000',
+			'overwrite'     => true,
+			'file_name'     => Staff::current()->username.'.jpg',
+			));
+
+		return $CI->upload->do_upload($fieldname);
+	}
+
 
 
 	// =======================================================
@@ -63,9 +131,19 @@ class Staff extends DataMapper
 
 	public function articles()
 	{
-		$result = Article::init()->where('staff_id', $this->id)->order_by('created_at', 'desc');
+		$result = Article::init()->where('staff_id', $this->id);
 
 		return $result;
+	}
+
+	public function latest_articles()
+	{
+		return $this->articles()->order_by('created_at', 'desc');
+	}
+
+	public function top_articles()
+	{
+		return $this->articles()->order_by('viewed', 'desc');
 	}
 
 	public function files()
@@ -84,6 +162,14 @@ class Staff extends DataMapper
 		return $result;
 	}
 
+	public function categories()
+	{
+		$c = new Category;
+		$result = $c->where('staff_id', $this->id);
+
+		return $result;
+	}
+
 
 	// =======================================================
 	//  DATA HANDLING
@@ -92,6 +178,25 @@ class Staff extends DataMapper
 	public function by_username($username)
 	{
 		return $this->where('username', $username)->get();
+	}
+
+	public static function update_profile($attributes)
+	{
+		$staff = Staff::current();
+
+		foreach($attributes as $key => $value)
+		{
+			$staff->$key = $value;
+		}
+
+		if($staff->save())
+		{
+			return true;
+		}
+		else
+		{
+			return $staff->error;
+		}
 	}
 
 
