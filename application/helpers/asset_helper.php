@@ -20,3 +20,14 @@ function js($name)
 	
 	return '<script type="text/javascript" src="'.$url.'"></script>';
 }
+
+function dropdown($array, $key)
+{
+	$result = array(null => '');
+	foreach($array as $row)
+	{
+		$result[$row->id] = $row->$key;
+	}
+
+	return $result;
+}

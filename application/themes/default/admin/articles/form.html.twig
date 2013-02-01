@@ -1,0 +1,36 @@
+{% extends _layout %}
+
+{% block content %}
+	{% if article %}
+		{% set title = 'Edit Artikel' %}
+		{% set action = article.id ~ '/edit' %}
+		{% set action_label = 'Simpan Perubahan' %}
+	{% else %}
+		{% set title = 'Artikel Baru' %}
+		{% set action = 'new' %}
+		{% set action_label = 'Simpan dan Publikasikan' %}
+	{% endif %}
+
+	<div class="hpad page-header">
+		<h2>{{title}}</h2>
+	</div>
+
+	<form action="{{ base_url('admin/articles/' ~ action) }}" class="form-horizontal hpad" method="post">
+		{{ tw_control('judul', error.title, form_input('title', old.title|default(article.title), 'class="span6"' ) ) }}
+		{{ tw_control('konten', error.content, form_textarea('content', old.content|default(article.content), 'class="span6"' ) ) }}
+		{{ tw_control('kategori', error.category_id, form_dropdown('category_id', dropdown(current.categories().get(), 'name'), old.category_id|default(article.category_id) ) ) }}
+
+		<div class="controls">
+			<input type="submit" value="{{ action_label }}" class="btn btn-primary">
+			<input type="reset" value="Reset" class="btn">
+		</div>
+	</form>
+{% endblock %}
+
+{% block scripts %}
+	<script type="text/javascript">
+		$(function(){
+			$('textarea').redactor();
+		});
+	</script>
+{% endblock %}

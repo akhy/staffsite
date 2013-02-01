@@ -1,0 +1,47 @@
+{% extends _layout %}
+
+{% block content %}
+
+	{% set articles = current.articles().get_paged(page, 10) %}
+	
+	<div class="hpad page-header">
+		<h2>Artikel Blog</h2>
+	</div>
+
+	<div class="hpad content">
+
+		{{ anchor('admin/articles/new', '<i class="icon-plus-sign"></i> Artikel Baru', {'class': 'btn btn-small'}) }}
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Judul</th>
+					<th>Waktu Dibuat</th>
+					<th>Terakhir Diperbarui</th>
+					<th>Kategori</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+			{% set i = articles.paged.current_row + 1 %}
+			{% for article in articles %}
+				<tr>
+					<td> {{ i }}</td>
+					<td> {{ article.title }} </td> 
+					<td> {{ article.created_at }} </td> 
+					<td> {{ article.updated_at }} </td> 
+					<td> {{ article.category.name }} </td> 
+					<td> 
+						{{ anchor('admin/articles/' ~ article.id ~ '/edit', '<i class="icon-pencil"></i>', 'class="edit"') }}
+						{{ anchor('admin/articles/' ~ article.id ~ '/delete', '<i class="icon-trash"></i>', 'class="delete"') }}
+						 
+					</td>
+					{% set i = i + 1 %}
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+{% endblock %}

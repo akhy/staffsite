@@ -1,0 +1,57 @@
+{% extends _layout %}
+
+{% block content %}
+
+	{% set files = current.files().get_paged(page, 10) %}
+	
+	<div class="hpad page-header">
+		<h2>Koleksi File</h2>
+	</div>
+
+	<div class="hpad content">
+
+		{{ anchor('admin/files/new', '<i class="icon-upload"></i> Upload File Baru', {'class': 'btn btn-small'}) }}
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Judul</th>
+					<th>File</th>
+					<th>Dibuat</th>
+					<th>Diperbarui</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+			{% set i = files.paged.current_row + 1 %}
+			{% for file in files %}
+				<tr>
+					<td> {{ i }}</td>
+					<td> {{ file.title }} 
+						<br>
+						<small><em>{{ file.content }}</em></small>
+					</td> 
+					<td> 
+						<a href="{{ base_url(file.url()) }}" class="download"> 
+							<span class="btn btn-mini">
+							<i class="icon-download-alt"></i>
+							{{ file.filename }} 
+							</span>
+						</a>
+					</td> 
+					<td> <small>{{ file.created_at }}</small> </td> 
+					<td> <small>{{ file.updated_at }}</small> </td> 
+					<td> 
+						{{ anchor('admin/files/' ~ file.id ~ '/edit', '<i class="icon-pencil"></i>', 'class="edit"') }}
+						{{ anchor('admin/files/' ~ file.id ~ '/delete', '<i class="icon-trash"></i>', 'class="delete"') }}
+						 
+					</td>
+					{% set i = i + 1 %}
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+{% endblock %}
