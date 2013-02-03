@@ -1,5 +1,5 @@
 .DS_Store
 environment.php
-application/config/db
-
+application/config/db/*
+!application/config/db/sample.php
 *.sublime-*
