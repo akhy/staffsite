@@ -1,0 +1,25 @@
+{% extends _layout %}
+
+{% block content %}
+
+	<div class="hpad page-header">
+		<h2>Reupload File</h2>
+	</div>
+
+
+	<form action="{{ base_url('admin/files/' ~ file.id ~ '/upload') }}" enctype="multipart/form-data" class="form-horizontal hpad" method="post">
+
+		{{ tw_control(null, null, file.filename) }}
+
+		{{ tw_control('file', null, '<input type="file" name="filename"></input>') }}
+
+		<div class="alert">
+			File lama akan ditimpa dengan file yang baru di-upload.
+		</div>
+
+		<div class="controls">
+			<input type="submit" value="Upload" class="btn btn-primary">
+			<input type="reset" value="Reset" class="btn">
+		</div>
+	</form>
+{% endblock %}

@@ -20,7 +20,9 @@
 		{{ tw_control('keterangan', error.content, form_textarea('content', old.content|default(file.content), 'class="span6"' ) ) }}
 
 		{% if file %}
-			{{ tw_control('file', null, '<strong>' ~ file.filename ~ '</strong>')}}
+			{{ tw_control('file', null, 
+			'<strong>' ~ file.filename ~ '</strong> ' ~ anchor('admin/files/' ~ file.id ~'/upload', '<span class="btn btn-mini"><i class="icon-upload"></i> Reupload</span>'))}}
+
 		{% else %}
 			{{ tw_control('file', error.filename, '<input type="file" name="filename"></input>')}}
 		{% endif %}

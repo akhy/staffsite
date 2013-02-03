@@ -104,11 +104,15 @@ class File extends DataMapper
 	 */
 	public function delete()
 	{
-		unlink(realpath($this->url()));
+		$this->unlink();
 
 		return parent::delete();
 	}
 
+	public function unlink()
+	{
+		unlink(realpath($this->url()));
+	}
 
 	/**
 	 * Relationships
