@@ -21,6 +21,8 @@ function js($name)
 	return '<script type="text/javascript" src="'.$url.'"></script>';
 }
 
+// SHOULD BE MOVED SOON TO ANOTHER FILE
+
 function dropdown($array, $key)
 {
 	$result = array(null => '');

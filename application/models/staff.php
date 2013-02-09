@@ -170,6 +170,13 @@ class Staff extends DataMapper
 		return $result;
 	}
 
+	public function activities_grouped()
+	{
+		$portfolio = new Portfolio;
+		$portfolio->auth($this);
+
+		return $portfolio->activities_grouped();
+	}
 
 	// =======================================================
 	//  DATA HANDLING

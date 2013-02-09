@@ -3,7 +3,7 @@
 /**
 * Portfolio handling
 */
-class Portfolio extends CI_Model
+class Portfolio
 {
 	public $conn;
 	public $user = null;
@@ -11,7 +11,6 @@ class Portfolio extends CI_Model
 
 	function __construct()
 	{
-		parent::__construct();
 		$this->conn = get_instance()->load->database('portfolio', true);
 
 		return $this;
@@ -58,11 +57,11 @@ class Portfolio extends CI_Model
 		foreach($activities as $activity)
 		{
 			$data = json_decode($activity->content);
-			$data_tmp = (object) null;
+			$data_tmp = array();
 			foreach($data as $dt)
 			{
 				$field = $dt->field;
-				$data_tmp->$field = $dt->content;
+				$data_tmp[$field] = $dt->content;
 			}
 
 			array_push($activities_tmp, (object) array(

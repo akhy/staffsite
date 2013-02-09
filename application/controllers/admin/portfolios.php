@@ -15,25 +15,7 @@ class Portfolios extends MY_Admin
 	public function get_index()
 	{
 		$portfolio = new Portfolio;
-		$p = $portfolio->auth( Staff::current() );
+		$portfolio->auth( Staff::current() );
 
-		echo '<pre>';
-		var_dump($p->activities_grouped());
-		echo '</pre>';
-
-		// foreach($p->activities() as $activity)
-		// {
-		// 	echo '<br>==============================================';
-		// 	echo '<h3>'.$activity->name.' '.count($activity->items).'</h3>';
-			
-		// 	foreach($activity->items as $key => $item)
-		// 	{
-		// 		echo '<pre>';
-		// 		echo "Item ".$key."\n";
-		// 		echo "\n";
-		// 		var_dump($item);
-		// 		echo '</pre>';
-		// 	}
-		// }
 	}
 }
