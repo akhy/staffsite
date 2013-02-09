@@ -7,18 +7,6 @@ class Home extends MY_Admin
 {
 
 	/**
-	 * Constructor
-	 */
-	public function __construct()
-	{
-		parent::__construct();
-
-		if( ! Staff::current() )
-			redirect('login');
-	}
-
-
-	/**
 	 * GET: admin/index 
 	 */
 	public function get_index()

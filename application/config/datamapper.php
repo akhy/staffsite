@@ -23,7 +23,7 @@ $config['auto_populate_has_one'] = FALSE;
 $config['all_array_uses_ids'] = FALSE;
 // set to FALSE to use the same DB instance across the board (breaks subqueries)
 // Set to any acceptable parameters to $CI->database() to override the default.
-$config['db_params'] = '';
+$config['db_params'] = 'staffsite';
 // Uncomment to enable the production cache
 // $config['production_cache'] = 'datamapper/cache';
 $config['extensions_path'] = 'datamapper';

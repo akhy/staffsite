@@ -44,6 +44,7 @@ $route['admin/files/(:num)/edit']      = 'admin/files/edit/$1';
 $route['admin/files/(:num)/delete']    = 'admin/files/delete/$1';
 $route['admin/files/(:num)/upload']    = 'admin/files/upload/$1';
 
+$route['admin/portfolios']             = 'admin/portfolios/index';
 
 
 /**

@@ -19,17 +19,10 @@
 	</div>
 	
 	{% for article in articles %}
-		<h4>
-			{{ anchor(article.url(), article.title) }}
-		</h4>
-
-		<small><em>Ditulis pada {{ article.created() }}</em></small>
-		<p>
-			{{ word_limiter(article.content, 50) }} <a href="#">Baca Selengkapnya &raquo;</a>
-		</p>
+		{% include '_loops/article.html.twig' %}
 	{% endfor %}
 
-{% endblock %}
+{% endblock %}	
 
 {% block sidebar %}
 	{% include '_parts/side_profile.html.twig' %}

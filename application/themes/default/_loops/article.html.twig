@@ -1,0 +1,17 @@
+<div class="article">
+	
+	{% include '_parts/article_date.html.twig' %}
+
+	<h4>
+		{{ anchor(article.url(), article.title) }}
+	</h4>
+	<small><em>Ditulis pada {{ article.created() }}</em></small>
+
+	<div class="clearfix"></div>
+	
+	{% if single %}
+		{{ article.content }}
+	{% else %}
+		{{ word_limiter(article.content, 50) }} {{ anchor(article.url(), 'Baca Selengkapnya &raquo;') }}
+	{% endif %}
+</div>

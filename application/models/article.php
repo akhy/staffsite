@@ -119,6 +119,11 @@ class Article extends DataMapper
 		return date('j F Y H:i', strtotime($this->updated_at));
 	}
 
+	public function date_format($format)
+	{
+		return date($format, strtotime($this->created_at));
+	}
+
 
 	// =======================================================
 	//  URL HANDLING
