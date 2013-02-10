@@ -14,6 +14,7 @@ class Home extends MY_Admin
 		$articles = Staff::current()->top_articles();
 
 		$twiggy = $this->view('admin/index')
+			->set('active', 'dashboard')
 			->set('articles', $articles)
 			->display();
 	}

@@ -12,8 +12,8 @@
 		<dt>Nomor Induk</dt>
 		<dd>{{ staff.nip }}</dd>
 
-		<dt>Tempat, Tanggal Lahir</dt>
-		<dd>{{ staff.pob }}, {{ staff.dob }}</dd>
+		<dt>Kelahiran</dt>
+		<dd>{{ staff.pob }}, {{ staff.dob|date('d F Y') }}</dd>
 
 		<dt>Alamat</dt>
 		<dd>{{ staff.address }}</dd>

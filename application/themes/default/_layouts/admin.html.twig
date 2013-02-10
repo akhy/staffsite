@@ -17,8 +17,6 @@
 		<div class="row">
 			<div class="span12">
 				<div id="header">
-					<img src="{{ base_url() ~ 'img/uii.png'}}" style="height: 60px"/>
-					INFORMATICS STAFFSITE
 				</div>
 				{% block content %}{% endblock %}
 				<div id="footer">
@@ -41,6 +39,11 @@
 		$(function(){
 			$('a.delete').click(function(){
 				return confirm('Anda yakin ingin menghapus data ini?');
+			});
+
+			$(function(){
+				$('#userbar-admin').addClass('active');
+				$('#userbar-{{ active }}').addClass('active');
 			});
 
 			$('a.edit').tooltip({'title': 'Edit'});
