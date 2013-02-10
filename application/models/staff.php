@@ -59,12 +59,23 @@ class Staff extends DataMapper
 
 	);
 
+	public $portfolio = null;
+
 	public function __construct()
 	{
 		parent::__construct();
 
 		$this->CI = get_instance();
 	}
+
+	// public function get()
+	// {
+	// 	$staff = parent::get();
+	// 	$staff->portfolio = new Portfolio;
+	// 	$staff->portfolio->auth($staff);
+
+	// 	return $staff;
+	// }
 
 	
 	// =======================================================
@@ -123,6 +134,14 @@ class Staff extends DataMapper
 		return $CI->upload->do_upload($fieldname);
 	}
 
+	public function update_portfolio_credential($username, $password)
+	{
+		$this->portfolio_username = $username;
+		$this->portfolio_password = md5($password);
+
+		return $this->save();
+	}
+
 
 
 	// =======================================================
@@ -170,6 +189,36 @@ class Staff extends DataMapper
 		return $result;
 	}
 
+	public function portfolio_init()
+	{
+		if($this->portfolio !== null)
+			return $this->portfolio;
+
+		$portfolio = new Portfolio;
+		$portfolio->auth($this);
+
+		if( ! $portfolio->valid() )
+			return $this->portfolio = null;
+
+		return $this->portfolio = $portfolio;
+	}
+
+	public function portfolio_valid()
+	{
+		$this->portfolio_init();
+
+		return $this->portfolio !== null;
+	}
+
+	public function activities_grouped()
+	{
+		$this->portfolio_init();
+
+		if($this->portfolio_valid())
+			return $this->portfolio->activities_grouped();
+
+		return array();
+	}
 
 	// =======================================================
 	//  DATA HANDLING

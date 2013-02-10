@@ -45,12 +45,37 @@ class Files extends MY_Admin
 	 */
 	public function get_edit($id)
 	{
-		$file = file::init($id);
+		$file = File::init($id);
 
 		$this->view('admin/files/form')
 			->prepend('Edit "'.$file->title.'"')
 			->set('form_type', 'edit')
 			->set('filetypes', File::$types)
+			->set('file', $file)
+			->display();
+	}
+
+	/**
+	 * GET: /admin/files/{$id}/delete
+	 */
+	public function get_delete($id)
+	{
+		$file = File::init($id);
+		$this->session->set_flashdata('status-success', 'Artikel "'.$file->title.'" berhasil dihapus');
+		$file->delete();
+
+		redirect('admin/files');
+	}
+
+	/**
+	 * GET: /admin/files/{$id}/upload
+	 */
+	public function get_upload($id)
+	{
+		$file = File::init($id);
+
+		$this->view('admin/files/upload')
+			->prepend('Reupload "'.$file->title.'"')
 			->set('file', $file)
 			->display();
 	}
@@ -92,13 +117,16 @@ class Files extends MY_Admin
 	}
 
 	/**
-	 * GET: /admin/files/{$id}/delete
+	 * POST: /admin/files/{$id}/upload
 	 */
-	public function get_delete($id)
+	public function post_upload($id)
 	{
 		$file = File::init($id);
-		$this->session->set_flashdata('status-success', 'Artikel "'.$file->title.'" berhasil dihapus');
-		$file->delete();
+
+		$file->unlink();
+		$file->filename = File::upload('filename');
+		$file->updated_at = date('Y-m-d H:i:s');
+		$file->save();
 
 		redirect('admin/files');
 	}
