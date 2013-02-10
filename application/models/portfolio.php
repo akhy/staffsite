@@ -16,6 +16,11 @@ class Portfolio
 		return $this;
 	}
 
+	public function valid()
+	{
+		return ($this->user !== null);
+	}
+
 	public function auth($staff)
 	{
 		$username = $staff->portfolio_username;
@@ -28,6 +33,8 @@ class Portfolio
 			->get()
 			;
 			
+		// echo $this->conn->last_query();
+		// exit;
 		if($user->num_rows() < 1)
 			return null;
 
@@ -39,7 +46,7 @@ class Portfolio
 	public function activities()
 	{
 		if($this->user === null)
-			return null;
+			return array();
 
 		if($this->activities !== null)
 			return $this->activities;

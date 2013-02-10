@@ -14,8 +14,17 @@ class Portfolios extends MY_Admin
 
 	public function get_index()
 	{
-		$portfolio = new Portfolio;
-		$portfolio->auth( Staff::current() );
+		$this->view('admin/portfolios/edit')
+			->display();
+	}
 
+	public function post_index()
+	{
+		Staff::current()->update_portfolio_credential(
+			$this->input->post('username'),
+			$this->input->post('password')
+			);
+
+		redirect('admin/portfolios');
 	}
 }

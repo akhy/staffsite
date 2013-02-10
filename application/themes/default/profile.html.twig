@@ -34,7 +34,7 @@
 	{% set id = 1 %}
 	{% set grp = 1 %}
 	{% for name, activities in staff.activities_grouped() %}
-	    <h4>{{ name }}</h4>
+		<h4>{{ name }}</h4>
 		<div id="group{{ grp }}" class="accordion">
 		{% for activity in activities %}
 			<div class="accordion-group">
@@ -47,15 +47,16 @@
 						{{ reset(activity) }}
 					</strong>
 				</div>
-		    	<div id="activity{{ id }}" class="accordion-body collapse" >
-				    <div class="activity-detail accordion-inner">
-					    {% for key,val in activity %}
-					    	{% if val %}
-					    	<div><strong>{{ key|replace('-', ' ')|capitalize }}</strong>: {{ val }}</div>    
-					    	{% endif %}
-					    {% endfor %}
-				    </div>
-		    	</div>
+				<div id="activity{{ id }}" class="accordion-body collapse" >
+					<dl class="dl-horizontal activity-detail accordion-inner">
+						{% for key,val in activity %}
+							{% if val %}
+								<dt>{{ key|replace('-', ' ')|capitalize }}</dt>
+								<dd>{{ val }}</dd>
+							{% endif %}
+						{% endfor %}
+					</dl>
+				</div>
 			</div>
 			{% set id = id + 1 %}
 		{% endfor %}
@@ -63,7 +64,7 @@
 		{% set grp = grp + 1 %}
 
 	{% else %}
-	    <em>Belum ada data portofolio</em>
+		<em>Belum ada data portofolio</em>
 	{% endfor %}
 {% endblock %}
 
