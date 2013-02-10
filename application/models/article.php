@@ -5,6 +5,20 @@
  */
 class Article extends DataMapper
 {
+	var $validation = array(
+		'title' => array(
+			'label' => 'Judul',
+			'rules' => array('required'),
+		),
+		'content' => array(
+			'label' => 'Konten',
+			'rules' => array('required'),
+		),
+		'category_id' => array(
+			'label' => 'Kategori',
+			'rules' => array('required'),
+		),
+	);
 
 	public function __construct()
 	{
@@ -18,9 +32,18 @@ class Article extends DataMapper
 	//  STATIC METHODS
 	// =======================================================
 
-	public static function init()
+	public static function init($param = null)
 	{
-		return new Article;
+		$result = new Article;
+
+		if(is_numeric($param))
+			return $result->where('id', $param)->get();
+
+		if(is_array($param))
+			foreach($param as $key => $value)
+				$result->$key = $value;
+
+		return $result;
 	}
 
 	public static function CI()
@@ -28,6 +51,37 @@ class Article extends DataMapper
 		return get_instance();
 	}
 
+	public static function create($array)
+	{
+		$article = Article::init($array);
+
+		$article->slug = url_title(strtolower($article->title), '-');
+		$article->staff_id = Staff::current()->id;
+		$article->created_at = date('Y-m-d H:i:s');
+		$article->updated_at = date('Y-m-d H:i:s');
+
+
+		if($article->save())
+			return false;
+		else
+			return $article->error;
+	}
+
+	public static function edit($id, $array)
+	{
+		$article = Article::init($id);
+
+		foreach($array as $key => $value)
+			$article->$key = $value;
+		
+		$article->slug = url_title(strtolower($article->title), '-');
+		$article->updated_at = date('Y-m-d H:i:s');
+
+		if($article->save())
+			return false;
+		else
+			return $article->error;
+	}
 
 	// =======================================================
 	//  RELATIONSHIPS
@@ -63,6 +117,11 @@ class Article extends DataMapper
 	public function updated()
 	{
 		return date('j F Y H:i', strtotime($this->updated_at));
+	}
+
+	public function date_format($format)
+	{
+		return date($format, strtotime($this->created_at));
 	}
 
 

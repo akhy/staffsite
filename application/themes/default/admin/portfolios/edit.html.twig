@@ -1,0 +1,74 @@
+{% extends _layout %}
+
+{% block content %}
+
+<div class="hpad page-header">
+	<h2>Portofolio Dosen</h2>
+	<div class="alert alert-info">
+		Untuk menampilkan portofolio, anda harus menghubungkan akun <strong>StaffSite</strong> anda
+		dengan <strong>Sistem Informasi Portofolio Informatika</strong>. 
+	</div>
+</div>
+
+
+<form class="form form-horizontal" action="{{ base_url('admin/portfolios') }}" method="post">
+
+	<div class="row">
+		<div class="span6">
+			<div class="hpad">
+			<legend>Login Sistem Informasi Portofolio</legend>
+			{{ tw_control('username', error.username, form_input('username', current.portfolio_username, 'placeholder="Username portofolio anda"' )) }}
+			{{ tw_control('password', error.password, form_password('password', '', 'placeholder="Password portofolio anda"' )) }}
+			<div class="controls">
+				<input type="submit" value="Autentikasi" class="btn btn-primary"/>
+				<input type="reset" value="Reset" class="btn"/>
+			</div>
+			</div>
+		</div>
+
+		<div class="span6">
+			<div class="hpad">
+				<legend>Status Autentikasi</legend>
+				<div id="activities-data" class="collapse">
+					{% for group,activities in current.activities_grouped %}
+					    <h5>{{ group }}</h5>
+					    {% for activity in activities %}
+					        <li>{{ reset(activity) }}</li>
+					    {% endfor %}
+					{% else %}
+					    <small>Autentikasi tidak valid atau 
+					    	belum ada data portofolio pada akun anda</small>
+					{% endfor %}
+					<hr/>
+				</div>
+				<dl class="dl-horizontal">
+					<dt>Username</dt>
+					<dd>{{ current.portfolio_username|default('-') }}</dd>
+					<dt>Password</dt>
+					<dd>
+						{% if current.portfolio_password %}
+							&middot;&middot;&middot;&middot;&middot;&middot;
+						{% else %}
+							-    
+						{% endif %}
+					</dd>
+					<dt>Status</dt>
+					<dd>
+						{% if current.portfolio_valid() %}
+							<span class="badge badge-success">Valid</span>
+							<small> <a class="nolink" data-toggle="collapse" data-target="#activities-data">Lihat sampel data</a> </small>
+						{% else %}
+							<span class="badge">Invalid Credential</span>
+						{% endif %}
+						<br>
+					</dd>
+				</dl>
+			</div>
+		</div>
+	</div>
+
+
+
+</form>
+
+{% endblock %}

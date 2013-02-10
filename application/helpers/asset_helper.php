@@ -20,3 +20,24 @@ function js($name)
 	
 	return '<script type="text/javascript" src="'.$url.'"></script>';
 }
+
+// SHOULD BE MOVED SOON TO ANOTHER FILE
+
+function dropdown($array, $key)
+{
+	$result = array(null => '');
+	foreach($array as $row)
+	{
+		$result[$row->id] = $row->$key;
+	}
+
+	return $result;
+}
+
+function dd($var)
+{
+	echo '<pre>';
+	var_dump($var);
+	echo '</pre>';
+	die();
+}

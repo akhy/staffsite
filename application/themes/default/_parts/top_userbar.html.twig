@@ -2,15 +2,15 @@
 	<div class="navbar-inner">
 		<ul class="nav">
 			<li>
-				<a href="#" style="padding-top: 5px; padding-bottom: 0">
+				<a href="{{ base_url() ~ staff.username }}" style="padding-top: 5px; padding-bottom: 0">
 					<img src="{{ base_url() ~ 'img/uii.png'}}" style="height: 30px"/>
 				</a>
 			</li>
 			<li class="divider-vertical"></li>
-			<li><a href="{{ base_url() }}admin"><i class="icon-white icon-cog"></i> Admin Area</a></li>
-			<li class="divider-vertical"></li>
-			<li><a href="#"><i class="icon-white icon-plus"></i> Tulis Artikel Baru</a></li>
-			<li class="divider-vertical"></li>
+			<li><a href="{{ base_url() }}admin"><i class="icon-white icon-home"></i> Dashboard</a></li>
+			<li><a href="{{ base_url() }}admin/articles"><i class="icon-white icon-pencil"></i> Artikel Blog</a></li>
+			<li><a href="{{ base_url() }}admin/files"><i class="icon-white icon-file"></i> File</a></li>
+			<li><a href="{{ base_url() }}admin/portfolios"><i class="icon-white icon-book"></i> Portofolio</a></li>
 
 		</ul>
 		<ul class="nav pull-right">
@@ -20,8 +20,9 @@
 				<b class="caret"></b>
 				</a>
 				<ul class="dropdown-menu">
-					<li><a href="#">Edit Profil</a></li>
-					<li><a href="#">Logout</a></li>
+					<li>{{ anchor('admin/profile/edit', 'Edit Profil') }}</li>
+					<li>{{ anchor('admin/profile/Password', 'Ubah Password') }}</li>
+					<li>{{ anchor('logout', 'Logout') }}</li>
 				</ul>
 			</li>
 		</ul>

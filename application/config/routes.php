@@ -24,23 +24,27 @@ $route['forget'] = 'auth/forget';
  * BACKEND
  */
 
-$route['admin']                       = 'admin/home/index';
+$route['admin']                        = 'admin/home/index';
 
-$route['admin/profile']               = 'admin/profile/index';
-$route['admin/profile/edit']          = 'admin/profile/edit';
-$route['admin/profile/password']      = 'admin/profile/password';
+$route['admin/profile']                = 'admin/profile/index';
+$route['admin/profile/edit']           = 'admin/profile/edit';
+$route['admin/profile/password']       = 'admin/profile/password';
+$route['admin/profile/picture']        = 'admin/profile/picture';
 
-$route['admin/article']               = 'admin/article/index';
-$route['admin/article/create']        = 'admin/article/create';
-$route['admin/article/(:num)/edit']   = 'admin/article/edit/$1';
-$route['admin/article/(:num)/delete'] = 'admin/article/delete/$1';
+$route['admin/articles']               = 'admin/articles/index';
+$route['admin/articles/page/(:num)']   = 'admin/articles/page/$1';
+$route['admin/articles/new']           = 'admin/articles/new';
+$route['admin/articles/(:num)/edit']   = 'admin/articles/edit/$1';
+$route['admin/articles/(:num)/delete'] = 'admin/articles/delete/$1';
 
-$route['admin/file']                  = 'admin/file/index';
-$route['admin/file/create']           = 'admin/file/create';
-$route['admin/file/(:num)/edit']      = 'admin/file/edit/$1';
-$route['admin/file/(:num)/upload']    = 'admin/file/upload/$1';
-$route['admin/file/(:num)/delete']    = 'admin/file/delete/$1';
+$route['admin/files']                  = 'admin/files/index';
+$route['admin/files/page/(:num)']      = 'admin/files/page/$1';
+$route['admin/files/new']              = 'admin/files/new';
+$route['admin/files/(:num)/edit']      = 'admin/files/edit/$1';
+$route['admin/files/(:num)/delete']    = 'admin/files/delete/$1';
+$route['admin/files/(:num)/upload']    = 'admin/files/upload/$1';
 
+$route['admin/portfolios']             = 'admin/portfolios/index';
 
 
 /**

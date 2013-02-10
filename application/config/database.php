@@ -53,10 +53,10 @@ else
 	$conn = include ($dbpath);
 
 
-$active_group = 'default';
+$active_group = 'staffsite';
 $active_record = TRUE;
 
-$db['default'] = $conn;
+$db = $conn;
 
 
 /* End of file database.php */

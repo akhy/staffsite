@@ -36,7 +36,11 @@ class Staffs extends MY_Controller {
 			redirect('/');
 
 		if( ! empty($username) )
-		$this->get_home($username);
+			$this->get_home($username);
+		else
+			$this->twiggy
+				->template('welcome')
+				->display();
 	}
 
 	/**
@@ -96,6 +100,10 @@ class Staffs extends MY_Controller {
 	 */
 	public function get_article($username, $id, $slug)
 	{
+		// Load needed helper and register as Twiggy function
+		$this->load->helper('text');
+		$this->twiggy->register_function('word_limiter');
+		
 		$article  = Article::init()->where('id', $id)->get();
 
 		// Increment viewed

@@ -5,7 +5,6 @@
  */
 class Category extends DataMapper
 {
-
 	public function staff()
 	{
 		$s = new Staff;

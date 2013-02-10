@@ -1,40 +1,20 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-/**
-* 
-*/
-class Home extends MY_Controller
+// Using base controller for admin area
+require_once(APPPATH.'core/MY_Admin.php');
+
+class Home extends MY_Admin
 {
 
 	/**
-	 * Constructor
-	 */
-	public function __construct()
-	{
-		parent::__construct();
-
-		if( ! Staff::current() )
-			redirect('login');
-	}
-
-
-	/**
-	 * Inject global Twig variable
-	 * - staff: Logged in staff data
-	 */
-	private function view()
-	{
-		return $this->twiggy->set('staff', Staff::current());
-	}
-
-
-	/**
-	 * Route: admin/index 
+	 * GET: admin/index 
 	 */
 	public function get_index()
 	{
-		$twiggy = $this->view()
-			->template('admin/index')
+		$articles = Staff::current()->top_articles();
+
+		$twiggy = $this->view('admin/index')
+			->set('articles', $articles)
 			->display();
 	}
 }

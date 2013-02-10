@@ -3,13 +3,29 @@
 <head>
 	<title>{{ title }}</title>
 	{{ css('lib/bootstrap/css/bootstrap.min.css') }}
-	{{ less('less/default.less') }}
-<body>
-
+	{{ less('less/admin.less') }}
+	{% for style in styles %}
+	    {{ css(style) }}
+	{% endfor %}
+	{{ js('js/less.js') }}
+</head>
+<body class="{{ is_login }}">
+	{% if current %}
+		{% include '_parts/top_userbar.html.twig' %}
+	{% endif %}
 	<div class="container">
 		<div class="row">
 			<div class="span12">
+				<div id="header">
+					<img src="{{ base_url() ~ 'img/uii.png'}}" style="height: 60px"/>
+					INFORMATICS STAFFSITE
+				</div>
 				{% block content %}{% endblock %}
+				<div id="footer">
+					Copyright &copy; 2012 Program Studi Teknik Informatika - Universitas Islam Indonesia <br>	
+					Phone. +62 274 895287 | Fax. +62 274 895007 ext. 148 <br>
+					Disclaimer | More info: informatika.fti@uii.ac.id
+				</div>
 			</div>
 		</div>
 	</div>
@@ -17,5 +33,22 @@
 	{{ js('js/holder.js') }}
 	{{ js('lib/jquery/jquery-1.7.1.min.js') }}
 	{{ js('lib/bootstrap/js/bootstrap.min.js') }}
+	{% for script in scripts %}
+	    {{ js(script) }}
+	{% endfor %}
+
+	<script type="text/javascript">
+		$(function(){
+			$('a.delete').click(function(){
+				return confirm('Anda yakin ingin menghapus data ini?');
+			});
+
+			$('a.edit').tooltip({'title': 'Edit'});
+			$('a.delete').tooltip({'title': 'Delete'});
+			$('a.download').tooltip({'title': 'Download', 'placement': 'left'});
+			$('a.upload').tooltip({'title': 'Re-upload'});
+		});
+	</script>
+	{% block scripts %}{% endblock %}
 </body>
 </html>

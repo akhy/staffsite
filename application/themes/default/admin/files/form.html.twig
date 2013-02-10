@@ -1,0 +1,38 @@
+{% extends _layout %}
+
+{% block content %}
+	{% if file %}
+		{% set title = 'Edit Keterangan File' %}
+		{% set action = file.id ~ '/edit' %}
+		{% set action_label = 'Simpan Perubahan' %}
+	{% else %}
+		{% set title = 'Upload File Baru' %}
+		{% set action = 'new' %}
+		{% set action_label = 'Upload dan Publikasikan' %}
+	{% endif %}
+
+	<div class="hpad page-header">
+		<h2>{{ title }}</h2>
+	</div>
+
+	<form action="{{ base_url('admin/files/' ~ action) }}" enctype="multipart/form-data" class="form-horizontal hpad" method="post">
+		{{ tw_control('judul', error.title, form_input('title', old.title|default(file.title), 'class="span6"' ) ) }}
+		{{ tw_control('keterangan', error.content, form_textarea('content', old.content|default(file.content), 'class="span6"' ) ) }}
+
+		{% if file %}
+			{{ tw_control('file', null, 
+			'<strong>' ~ file.filename ~ '</strong> ' ~ anchor('admin/files/' ~ file.id ~'/upload', '<span class="btn btn-mini"><i class="icon-upload"></i> Reupload</span>'))}}
+
+		{% else %}
+			{{ tw_control('file', error.filename, '<input type="file" name="filename"></input>')}}
+		{% endif %}
+		
+		{{ tw_control('jenis file', error.filetype, form_dropdown('filetype', filetypes, old.filetype|default(file.filetype) ) ) }}
+
+
+		<div class="controls">
+			<input type="submit" value="{{ action_label }}" class="btn btn-primary">
+			<input type="reset" value="Reset" class="btn">
+		</div>
+	</form>
+{% endblock %}

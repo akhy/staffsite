@@ -1,33 +1,71 @@
 {% extends _layout %}
 
 {% block content %}
-<div class="page-header">
-	<h3>{{ staff.fullname }}</h3>
-</div>
+	<div class="page-header">
+		<h3>{{ staff.fullname }}</h3>
+	</div>
 
-<dl class="dl-horizontal">
-	<dt>Posisi</dt>
-	<dd>{{ staff.position }}</dd>
+	<dl class="dl-horizontal">
+		<dt>Posisi</dt>
+		<dd>{{ staff.position }}</dd>
 
-	<dt>Nomor Induk</dt>
-	<dd>{{ staff.nip }}</dd>
+		<dt>Nomor Induk</dt>
+		<dd>{{ staff.nip }}</dd>
 
-	<dt>Tempat, Tanggal Lahir</dt>
-	<dd>{{ staff.pob }}, {{ staff.dob }}</dd>
+		<dt>Tempat, Tanggal Lahir</dt>
+		<dd>{{ staff.pob }}, {{ staff.dob }}</dd>
 
-	<dt>Alamat</dt>
-	<dd>{{ staff.address }}</dd>
+		<dt>Alamat</dt>
+		<dd>{{ staff.address }}</dd>
 
-	<dt>E-mail</dt>
-	<dd>{{ staff.email }}</dd>
+		<dt>E-mail</dt>
+		<dd>{{ staff.email }}</dd>
 
-	<dt>Aktifitas</dt>
-	<dd>{{ staff.activity }}</dd>
+		<dt>Aktifitas</dt>
+		<dd>{{ staff.activity }}</dd>
 
-	<dt>Riset</dt>
-	<dd>{{ staff.research }}</dd>
-</dl>
+		<dt>Riset</dt>
+		<dd>{{ staff.research }}</dd>
+	</dl>
+	
+	<div class="page-header">
+		<h3>Portofolio</h3>
+	</div>
+	{% set id = 1 %}
+	{% set grp = 1 %}
+	{% for name, activities in staff.activities_grouped() %}
+		<h4>{{ name }}</h4>
+		<div id="group{{ grp }}" class="accordion">
+		{% for activity in activities %}
+			<div class="accordion-group">
+				<div class="accordion-heading">
+					<strong class="accordion-toggle"
+						data-toggle="collapse"
+						data-target="#activity{{ id }}"
+						data-parent="#group{{ grp }}"
+						>
+						{{ reset(activity) }}
+					</strong>
+				</div>
+				<div id="activity{{ id }}" class="accordion-body collapse" >
+					<dl class="dl-horizontal activity-detail accordion-inner">
+						{% for key,val in activity %}
+							{% if val %}
+								<dt>{{ key|replace('-', ' ')|capitalize }}</dt>
+								<dd>{{ val }}</dd>
+							{% endif %}
+						{% endfor %}
+					</dl>
+				</div>
+			</div>
+			{% set id = id + 1 %}
+		{% endfor %}
+		</div>
+		{% set grp = grp + 1 %}
 
+	{% else %}
+		<em>Belum ada data portofolio</em>
+	{% endfor %}
 {% endblock %}
 
 {% block sidebar %}
