@@ -11,7 +11,7 @@
 </div>
 <hr>
 
-<form class="form form-horizontal" action="{{ base_url() }}admin/profile/edit" method="post">
+<form class="form form-horizontal" action="{{ site_url('admin/profile/edit') }}" method="post">
 	<div class="row">
 		<div class="span6">
 			{{ tw_control('nama lengkap', error.fullname, form_input('fullname', old.fullname|default(profile.fullname) )) }}
