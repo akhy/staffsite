@@ -7,6 +7,15 @@
 		<![endif]-->
 		<title>{{ title }}</title>
 		<link href="{{ base_url('img/favicon.ico') }}" rel="shortcut icon" type="image/x-icon">
+
+		{% for name,content in meta %}
+			<meta name="{{ name }}" content="{{ content }}"></meta>
+		{% endfor %}
+
+		{% for property,content in properties %}
+			<meta property="{{ property }}" content="{{ content }}"></meta>
+		{% endfor %}
+
 		{{ css('lib/bootstrap/css/bootstrap.min.css') }}
 		{{ less('less/default.less') }}
 		{{ js('js/less.js') }}
@@ -45,6 +54,10 @@
 					Copyright &copy; 2012 Program Studi Teknik Informatika - Universitas Islam Indonesia <br>	
 					Phone. +62 274 895287 | Fax. +62 274 895007 ext. 148 <br>
 					Disclaimer | More info: informatika.fti@uii.ac.id
+					{% if not current %}
+						<br>
+						{{ anchor('login', 'Login') }}
+					{% endif %}
 				</div>
 			</div>
 		</div>

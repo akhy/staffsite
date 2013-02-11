@@ -99,6 +99,25 @@ class Article extends DataMapper
 		return $c->where('id', $this->category_id)->get();
 	}
 
+	public function meta()
+	{
+		return array(
+			'twitter:card' => 'summary',
+			'twitter:url' => site_url($this->url()),
+			'twitter:title' => $this->title,
+			);
+	}
+
+	public function properties()
+	{
+		return array(
+			'og:type' => 'article',
+			'og:url' => site_url($this->url()),
+			'og:title' => $this->title,
+			'og:description' => substr(strip_tags($this->content), 0, 200),
+			'og:image' => base_url('img/uii.jpg'),
+			);
+	}
 
 	// =======================================================
 	//  DATA HANDLING
@@ -132,5 +151,10 @@ class Article extends DataMapper
 	public function url()
 	{
 		return $this->staff()->username.'/article/'.$this->id.'-'.$this->slug;
+	}
+
+	public function page_url()
+	{
+		
 	}
 }

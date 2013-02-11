@@ -6,7 +6,7 @@
 	<h2>Upload Gambar Profil</h2>
 </div>
 
-<form action="{{base_url('admin/profile/picture')}}" method="post" enctype="multipart/form-data" class="form form-horizontal">
+<form action="{{ site_url('admin/profile/picture') }}" method="post" enctype="multipart/form-data" class="form form-horizontal">
 	<div class="controls">
 		{{ img({'src': current.picture_url(), 'width': '100', 'class': 'thumbnaila'}) }} 
 	</div>

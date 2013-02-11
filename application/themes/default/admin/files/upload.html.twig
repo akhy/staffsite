@@ -7,7 +7,7 @@
 	</div>
 
 
-	<form action="{{ base_url('admin/files/' ~ file.id ~ '/upload') }}" enctype="multipart/form-data" class="form-horizontal hpad" method="post">
+	<form action="{{ site_url('admin/files/' ~ file.id ~ '/upload') }}" enctype="multipart/form-data" class="form-horizontal hpad" method="post">
 
 		{{ tw_control(null, null, file.filename) }}
 

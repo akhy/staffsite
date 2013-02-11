@@ -2,6 +2,8 @@
 
 class Staffs extends MY_Controller {
 
+	public $meta = array();
+	public $properties = array();
 
 	/**
 	 * Inject global Twig variable
@@ -22,6 +24,8 @@ class Staffs extends MY_Controller {
 			->template($template)
 			->set('current', $current)
 			->set('is_login', $current ? 'login' : '')
+			->set('meta', $this->meta)
+			->set('properties', $this->properties)
 			->set('staff', $staff)
 			->title($staff->fullname)
 				->append(SITE_TITLE);
@@ -39,6 +43,7 @@ class Staffs extends MY_Controller {
 			$this->get_home($username);
 		else
 			$this->twiggy
+				->set('staffs', Staff::all())
 				->template('welcome')
 				->display();
 	}
@@ -61,7 +66,7 @@ class Staffs extends MY_Controller {
 	 * Show a staff's profile
 	 */
 	public function get_profile($username)
-	{
+	{ 
 		$this->view('profile', $username)
 			->set('active', 'profile')
 			->display();
@@ -105,6 +110,10 @@ class Staffs extends MY_Controller {
 		$this->twiggy->register_function('word_limiter');
 		
 		$article  = Article::init()->where('id', $id)->get();
+
+		// Setup page metadata
+		$this->meta = array_merge($this->meta, $article->meta());
+		$this->properties = array_merge($this->properties, $article->properties());
 
 		// Increment viewed
 		$article->increment();
