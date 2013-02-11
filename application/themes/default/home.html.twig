@@ -1,16 +1,22 @@
 {% extends _layout %}
 
 {% block content %}
-
+	<div>
 	{% for article in staff.articles().get_paged(1, 10) %}
 		{% include '_loops/article.html.twig' %}
+
+	{% else %}
+	    <em>Belum ada artikel untuk ditampilkan</em>
 	{% endfor %}
+	</div>
 
 	<hr>
 
 	<h5>File Terbaru</h5>
 	{% for file in staff.files().get_paged(1, 5) %}
 		{% include '_loops/file.html.twig' %}
+	{% else %}
+	    <em>Belum ada file untuk di-download</em>
 	{% endfor %}
 
 {% endblock %}

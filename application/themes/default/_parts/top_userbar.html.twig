@@ -26,9 +26,11 @@
 				</ul>
 			</li>
 			
+			{% if not staff %}
 			<li>
 				<a href="{{ site_url(current.username) }}">Visit Your Homepage &raquo;</a>
 			</li>
+			{% endif %}
 		</ul>
 		<ul class="nav pull-right">
 			<li class="dropdown">
