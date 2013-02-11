@@ -1,0 +1,44 @@
+{% extends _layout %}
+
+{% block content %}
+
+	<div class="hpad page-header">
+		<h2>Link</h2>
+	</div>
+
+	<div class="hpad content">
+
+		{{ anchor('admin/links/new', '<i class="icon-plus-sign"></i> Link Baru', {'class': 'btn btn-small'}) }}
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Tipe</th>
+					<th>URL</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+			{% set i = links.current_row + 1 %}
+			{% for link in current.links().get() %}
+				<tr>
+					<td> {{ i }}</td>
+					<td> 
+						{{ img({'src': link.image_url(), 'width': 20}) }}
+						{{ link.type().name }} 
+					</td> 
+					<td> {{ link.url }} </td> 
+					<td> 
+						{{ anchor('admin/links/' ~ link.id ~ '/edit', '<i class="icon-pencil"></i>', 'class="edit"') }}
+						{{ anchor('admin/links/' ~ link.id ~ '/delete', '<i class="icon-trash"></i>', 'class="delete"') }}
+						 
+					</td>
+					{% set i = i + 1 %}
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+{% endblock %}

@@ -31,6 +31,12 @@ $route['admin/profile/edit']           = 'admin/profile/edit';
 $route['admin/profile/password']       = 'admin/profile/password';
 $route['admin/profile/picture']        = 'admin/profile/picture';
 
+$route['admin/links']                  = 'admin/links/index';
+$route['admin/links/page/(:num)']      = 'admin/links/page/$1';
+$route['admin/links/new']              = 'admin/links/new';
+$route['admin/links/(:num)/edit']      = 'admin/links/edit/$1';
+$route['admin/links/(:num)/delete']    = 'admin/links/delete/$1';
+
 $route['admin/articles']               = 'admin/articles/index';
 $route['admin/articles/page/(:num)']   = 'admin/articles/page/$1';
 $route['admin/articles/new']           = 'admin/articles/new';

@@ -1,0 +1,27 @@
+{% extends _layout %}
+
+{% block content %}
+	{% if link %}
+		{% set title = 'Edit Link' %}
+		{% set action = link.id ~ '/edit' %}
+		{% set action_label = 'Simpan' %}
+	{% else %}
+		{% set title = 'Link Baru' %}
+		{% set action = 'new' %}
+		{% set action_label = 'Tambahkan' %}
+	{% endif %}
+
+	<div class="hpad page-header">
+		<h2>{{title}}</h2>
+	</div>
+
+	<form action="{{ site_url('admin/links/' ~ action) }}" class="form-horizontal hpad" method="post">
+		{{ tw_control('URL', error.url, form_input('url', old.url|default(link.url), 'class="span6"' ) ) }}
+		{{ tw_control('tipe', error.linktype_id, form_dropdown('linktype_id', dropdown(linktypes, 'name'), old.linktype_id|default(link.linktype_id) ) ) }}
+
+		<div class="controls">
+			<input type="submit" value="{{ action_label }}" class="btn btn-primary">
+			<input type="reset" value="Reset" class="btn">
+		</div>
+	</form>
+{% endblock %}

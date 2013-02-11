@@ -5,6 +5,11 @@
  */
 class LinkType extends DataMapper
 {
+	public static function all()
+	{
+		$lt = new LinkType;
+		return $lt->get(); 
+	} 
 
 	public function image_url()
 	{
