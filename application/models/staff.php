@@ -87,6 +87,11 @@ class Staff extends DataMapper
 		return new Staff;
 	}
 
+	public static function all()
+	{
+		return Staff::init()->order_by('fullname')->get();
+	}
+
 	public static function CI()
 	{
 		return get_instance();
@@ -255,26 +260,28 @@ class Staff extends DataMapper
 
 	public function picture_url()
 	{
-		return base_url().'content/avatar/'.$this->picture;
+		return $this->picture == null
+			? base_url('img/staff.jpg')
+			: base_url('content/avatar/'.$this->picture);
 	}
 
 	public function home_url()
 	{
-		return base_url().$this->username;
+		return base_url($this->username);
 	}
 
 	public function profile_url()
 	{
-		return base_url().$this->username.'/profile';
+		return base_url($this->username.'/profile');
 	}
 
 	public function download_url()
 	{
-		return base_url().$this->username.'/download';
+		return base_url($this->username.'/download');
 	}
 
 	public function blog_url()
 	{
-		return base_url().$this->username.'/blog';
+		return base_url($this->username.'/blog');
 	}
 }

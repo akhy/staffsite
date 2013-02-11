@@ -152,4 +152,9 @@ class Article extends DataMapper
 	{
 		return $this->staff()->username.'/article/'.$this->id.'-'.$this->slug;
 	}
+
+	public function page_url()
+	{
+		
+	}
 }

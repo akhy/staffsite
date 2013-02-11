@@ -43,6 +43,7 @@ class Staffs extends MY_Controller {
 			$this->get_home($username);
 		else
 			$this->twiggy
+				->set('staffs', Staff::all())
 				->template('welcome')
 				->display();
 	}

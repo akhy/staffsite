@@ -2,7 +2,7 @@
 	<div class="navbar-inner">
 		<ul class="nav">
 			<li>
-				<a href="{{ site_url(current.username) }}" style="padding-top: 5px; padding-bottom: 0">
+				<a href="{{ site_url() }}" style="padding-top: 5px; padding-bottom: 0">
 					<img src="{{ base_url() ~ 'img/uii.png'}}" style="height: 30px"/>
 					&nbsp; 
 					<strong style="font-family: serif">
@@ -26,7 +26,9 @@
 				</ul>
 			</li>
 			
-
+			<li>
+				<a href="{{ site_url(current.username) }}">Visit Your Homepage &raquo;</a>
+			</li>
 		</ul>
 		<ul class="nav pull-right">
 			<li class="dropdown">

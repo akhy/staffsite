@@ -6,26 +6,40 @@
 	</div>
 
 	<dl class="dl-horizontal">
-		<dt>Posisi</dt>
-		<dd>{{ staff.position }}</dd>
+		{% if staff.position %}
+			<dt>Posisi</dt>
+			<dd>{{ staff.position }}</dd>
+		{% endif %}
 
+		{% if staff.nip %}
 		<dt>Nomor Induk</dt>
 		<dd>{{ staff.nip }}</dd>
+		{% endif %}
 
+		{% if staff.pob %}
 		<dt>Kelahiran</dt>
 		<dd>{{ staff.pob }}, {{ staff.dob|date('d F Y') }}</dd>
+		{% endif %}
 
+		{% if staff.address %}
 		<dt>Alamat</dt>
 		<dd>{{ staff.address }}</dd>
+		{% endif %}
 
+		{% if staff.email %}
 		<dt>E-mail</dt>
 		<dd>{{ staff.email }}</dd>
+		{% endif %}
 
+		{% if staff.activity %}
 		<dt>Aktifitas</dt>
 		<dd>{{ staff.activity }}</dd>
+		{% endif %}
 
+		{% if staff.research %}
 		<dt>Riset</dt>
 		<dd>{{ staff.research }}</dd>
+		{% endif %}
 	</dl>
 	
 	<div class="page-header">

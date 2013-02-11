@@ -1,32 +1,73 @@
 <!doctype html>
 <html>
 <head>
-	<title></title>
+	<title>Informatics Department | Universitas Islam Indonesia</title>
+	{{ css('lib/bootstrap/css/bootstrap.min.css') }}
 	<style type="text/css">
-		.left{
-			background: #ddd;
-			width: 50%;
-			float: left;
+		body{
+			width: 650px;
+			margin: 50px auto;
+			text-align: center;
 		}
-		.right{
-			background: #777;
-			width: 50%;
-			float: right;
+		.logo1{
+			margin-right: 30px;
+		}
+		#avatars, #action{
+			margin-top: 30px;
+		}
+		#avatars{
+			line-height: 60px;
+		}
+		#avatars img{
+			margin: 0px 3px;
+		}
+		#footer{
+			margin-top: 50px;
+			font-size: 11px;
+			color: #777;
+		}
+		a{
+			text-decoration: none;
+		}
+		a.login{
+			background: #888;
+			color: white;
+			padding: 1em 3em;
+			border-radius: 5px;
+		}
+		a.login:hover{
+			background: #088;
+			text-decoration: none;
+		}
+
+		hr{
+			border: none;
+			border-top: 1px solid #ddd;
+			margin-top: 30px;
 		}
 	</style>
 </head>
 <body>
 
-	{{ img({ 'src': 'img/uii.jpg', 'width': 100}) }}
-	{{ img('img/staffsite.png') }}
-	<div>
-		<div class="left">
-			asd
-		</div>
-
-		<div class="right">
-			asd
-		</div>
+	{{ img({ 'src': 'img/uii.jpg', 'width': 100, 'class': 'logo1'}) }}
+	{{ img({ 'src': 'img/staffsite.png', 'class': 'logo2'}) }}
+	<hr>
+	<div id="avatars">
+		{% for staff in staffs %}
+		<a href="{{ staff.home_url() }}" title="{{ staff.fullname }}" data-toggle="tooltip" data-trigger="hover">{{ img({'src': staff.picture_url(), 'width': 50 }) }}</a>
+		{% endfor %}
 	</div>
+
+	<div id="action">
+		{{ anchor('login', 'LOGIN', 'class="login"') }}
+	</div>
+
+	<div id="footer">
+		Copyright © 2012 Program Studi Teknik Informatika - Universitas Islam Indonesia <br/>
+		Phone. +62 274 895287 | Fax. +62 274 895007 ext. 148 <br/>
+		Disclaimer | More info: informatika.fti@uii.ac.id <br/>
+	</div>
+	{{ js('lib/jquery/jquery-1.7.1.min.js') }}
+	{{ js('lib/bootstrap/js/bootstrap.min.js') }}
 </body>
 </html>
