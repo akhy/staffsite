@@ -89,6 +89,22 @@ class Staffs extends MY_Controller {
 	}
 
 	/**
+	 * Show article feeds
+	 */
+	public function get_feed($username)
+	{
+		$staff = Staff::init()->by_username($username);
+
+		header('content-type: application/rss+xml');
+
+		echo $this->twiggy
+			->layout('xml')
+			->template('rss')
+			->set('staff', $staff)
+			->render();
+	}
+
+	/**
 	 * Show all shared files
 	 */
 	public function get_download($username, $page = 1)

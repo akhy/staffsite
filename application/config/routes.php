@@ -51,6 +51,7 @@ $route['admin/portfolios']             = 'admin/portfolios/index';
  * FRONTEND
  */
 
+$route['(:any)/feed']                  = 'staffs/feed/$1/1';
 $route['(:any)/download']              = 'staffs/download/$1/1';
 $route['(:any)/download/(:num)']       = 'staffs/download/$1/$2';
 $route['(:any)/blog']                  = 'staffs/blog/$1/1';

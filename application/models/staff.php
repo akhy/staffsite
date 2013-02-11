@@ -160,9 +160,13 @@ class Staff extends DataMapper
 		return $result;
 	}
 
-	public function latest_articles()
+	public function latest_articles($count = null)
 	{
-		return $this->articles()->order_by('created_at', 'desc');
+		$articles = $this->articles()->order_by('created_at', 'desc');
+
+		if($count !== null) $articles->limit($count);
+
+		return $articles;
 	}
 
 	public function top_articles()
@@ -258,6 +262,11 @@ class Staff extends DataMapper
 	//  URL HANDLING
 	// =======================================================
 
+	public function feed_url()
+	{
+		return site_url($this->username.'/feed');
+	}
+
 	public function picture_url()
 	{
 		return $this->picture == null
@@ -267,21 +276,21 @@ class Staff extends DataMapper
 
 	public function home_url()
 	{
-		return base_url($this->username);
+		return site_url($this->username);
 	}
 
 	public function profile_url()
 	{
-		return base_url($this->username.'/profile');
+		return site_url($this->username.'/profile');
 	}
 
 	public function download_url()
 	{
-		return base_url($this->username.'/download');
+		return site_url($this->username.'/download');
 	}
 
 	public function blog_url()
 	{
-		return base_url($this->username.'/blog');
+		return site_url($this->username.'/blog');
 	}
 }
