@@ -8,6 +8,7 @@
 		<h3>File Terbaru</h3>
 	</div>
 
+	{% if files|length > 1 %}
 	<div>
 		Page {{ page }} of {{ files.paged.total_pages }} &mdash; 
 
@@ -17,9 +18,12 @@
 		{% endfor %}
 		&raquo;
 	</div>
+	{% endif %}
 
 	{% for file in files %}
 		{% include '_loops/file.html.twig' %}
+	{% else %}
+	    <em>Belum ada file untuk di-download</em>
 	{% endfor %}
 
 {% endblock %}

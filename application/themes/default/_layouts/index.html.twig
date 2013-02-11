@@ -54,6 +54,10 @@
 					Copyright &copy; 2012 Program Studi Teknik Informatika - Universitas Islam Indonesia <br>	
 					Phone. +62 274 895287 | Fax. +62 274 895007 ext. 148 <br>
 					Disclaimer | More info: informatika.fti@uii.ac.id
+					{% if not current %}
+						<br>
+						{{ anchor('login', 'Login') }}
+					{% endif %}
 				</div>
 			</div>
 		</div>
