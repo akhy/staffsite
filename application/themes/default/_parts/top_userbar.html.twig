@@ -24,9 +24,11 @@
 					<li id="userbar-files"><a href="{{ site_url('admin/files') }}"><i class="icon-file"></i> File</a></li>
 					<li id="userbar-portfolios"><a href="{{ site_url('admin/portfolios') }}"><i class="icon-book"></i> Portofolio</a></li>
 
+					<li id="userbar-links"><a href="{{ site_url('admin/links') }}"><i class="icon-globe"></i> Link</a></li>
+
 					<li class="divider"></li>
-					<li>{{ anchor('admin/profile/edit', 'Edit Profil') }}</li>
-					<li>{{ anchor('admin/profile/Password', 'Ubah Password') }}</li>
+					<li id="userbar-profile"><a href="{{ site_url('admin/profile/edit') }}"> Edit Profil</a></li>
+					<li id="userbar-password"><a href="{{ site_url('admin/profile/password') }}"> Ubah assword</a></li>
 					<li>{{ anchor('logout', 'Logout') }}</li>
 				</ul>
 			</li>

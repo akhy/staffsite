@@ -9,6 +9,13 @@ require_once(APPPATH.'core/MY_Admin.php');
 class Profile extends MY_Admin
 {
 
+	protected function view($template)
+	{
+		return parent::view($template)
+			->set('active', 'profile')
+			;
+	}
+
 	public function get_index()
 	{
 		$this->get_edit();
