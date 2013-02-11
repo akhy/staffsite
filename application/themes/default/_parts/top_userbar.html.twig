@@ -15,7 +15,7 @@
 
 			<li id="userbar-admin" class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-				<i class="icon-white icon-user"></i> Admin Area
+				<i class="icon-white icon-cog"></i> Admin Area
 				<b class="caret"></b>
 				</a>
 				<ul class="dropdown-menu">
@@ -23,6 +23,11 @@
 					<li id="userbar-articles"><a href="{{ site_url('admin/articles') }}"><i class="icon-pencil"></i> Artikel Blog</a></li>
 					<li id="userbar-files"><a href="{{ site_url('admin/files') }}"><i class="icon-file"></i> File</a></li>
 					<li id="userbar-portfolios"><a href="{{ site_url('admin/portfolios') }}"><i class="icon-book"></i> Portofolio</a></li>
+
+					<li class="divider"></li>
+					<li>{{ anchor('admin/profile/edit', 'Edit Profil') }}</li>
+					<li>{{ anchor('admin/profile/Password', 'Ubah Password') }}</li>
+					<li>{{ anchor('logout', 'Logout') }}</li>
 				</ul>
 			</li>
 			
@@ -39,8 +44,6 @@
 				<b class="caret"></b>
 				</a>
 				<ul class="dropdown-menu">
-					<li>{{ anchor('admin/profile/edit', 'Edit Profil') }}</li>
-					<li>{{ anchor('admin/profile/Password', 'Ubah Password') }}</li>
 					<li>{{ anchor('logout', 'Logout') }}</li>
 				</ul>
 			</li>
