@@ -15,7 +15,7 @@
 		<h2>{{title}}</h2>
 	</div>
 
-	<form action="{{ base_url('admin/articles/' ~ action) }}" class="form-horizontal hpad" method="post">
+	<form action="{{ site_url('admin/articles/' ~ action) }}" class="form-horizontal hpad" method="post">
 		{{ tw_control('judul', error.title, form_input('title', old.title|default(article.title), 'class="span6"' ) ) }}
 		{{ tw_control('konten', error.content, form_textarea('content', old.content|default(article.content), 'class="span6"' ) ) }}
 		{{ tw_control('kategori', error.category_id, form_dropdown('category_id', dropdown(current.categories().get(), 'name'), old.category_id|default(article.category_id) ) ) }}

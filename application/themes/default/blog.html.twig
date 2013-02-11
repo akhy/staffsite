@@ -8,18 +8,22 @@
 		<h3>Artikel Blog</h3>
 	</div>
 
+	{% if articles|length > 1 %}
 	<div>
 		Page {{ page }} of {{ articles.paged.total_pages }} &mdash; 
 
 		&laquo;
 		{% for i in range(1, articles.paged.total_pages) %}
-		    [{{ i }}] 
+		    [{{ article.page_url(i) }}] 
 		{% endfor %}
 		&raquo;
 	</div>
+	{% endif %}
 	
 	{% for article in articles %}
 		{% include '_loops/article.html.twig' %}
+	{% else %}
+		<em>Belum ada artikel untuk ditampilkan</em>
 	{% endfor %}
 
 {% endblock %}	

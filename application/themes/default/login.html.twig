@@ -8,7 +8,7 @@
 <body onload="document.login.username.focus();">
 	
 	<div id="container">
-		<form action="{{ base_url() }}login" method="POST" onSubmit="return validasi(this)">
+		<form action="{{ site_url('login') }}" method="POST" onSubmit="return validasi(this)">
 
 			<h3>LOGIN</h3>
 		
@@ -18,7 +18,7 @@
 			<label for="password">Password</label>
 			<input type="password" name="password"/>
 
-			<label for="lupa"><a href="{{ base_url() }}forget">Lupa Password?</a></label>
+			<label for="lupa"><a href="{{ site_url('forget') }}">Lupa Password?</a></label>
 			
 			<div id="lower">
 				<input type="submit" value="Login">

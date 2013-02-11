@@ -5,6 +5,13 @@ require_once(APPPATH.'core/MY_Admin.php');
 
 class Portfolios extends MY_Admin
 {
+
+	protected function view($template)
+	{
+		return parent::view($template)
+			->set('active', 'portfolios');
+	}
+
 	public function __construct()
 	{
 		parent::__construct();

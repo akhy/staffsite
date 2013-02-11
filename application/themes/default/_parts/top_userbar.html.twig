@@ -2,16 +2,33 @@
 	<div class="navbar-inner">
 		<ul class="nav">
 			<li>
-				<a href="{{ base_url() ~ staff.username }}" style="padding-top: 5px; padding-bottom: 0">
+				<a href="{{ site_url() }}" style="padding-top: 5px; padding-bottom: 0">
 					<img src="{{ base_url() ~ 'img/uii.png'}}" style="height: 30px"/>
+					&nbsp; 
+					<strong style="font-family: serif">
+					UII STAFFSITE
+					</strong>
 				</a>
 			</li>
-			<li class="divider-vertical"></li>
-			<li><a href="{{ base_url() }}admin"><i class="icon-white icon-home"></i> Dashboard</a></li>
-			<li><a href="{{ base_url() }}admin/articles"><i class="icon-white icon-pencil"></i> Artikel Blog</a></li>
-			<li><a href="{{ base_url() }}admin/files"><i class="icon-white icon-file"></i> File</a></li>
-			<li><a href="{{ base_url() }}admin/portfolios"><i class="icon-white icon-book"></i> Portofolio</a></li>
 
+			<li class="divider-vertical"></li>
+
+			<li id="userbar-admin" class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+				<i class="icon-white icon-user"></i> Admin Area
+				<b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu">
+					<li id="userbar-dashboard"><a href="{{ site_url('admin') }}"><i class="icon-home"></i> Dashboard</a></li>
+					<li id="userbar-articles"><a href="{{ site_url('admin/articles') }}"><i class="icon-pencil"></i> Artikel Blog</a></li>
+					<li id="userbar-files"><a href="{{ site_url('admin/files') }}"><i class="icon-file"></i> File</a></li>
+					<li id="userbar-portfolios"><a href="{{ site_url('admin/portfolios') }}"><i class="icon-book"></i> Portofolio</a></li>
+				</ul>
+			</li>
+			
+			<li>
+				<a href="{{ site_url(current.username) }}">Visit Your Homepage &raquo;</a>
+			</li>
 		</ul>
 		<ul class="nav pull-right">
 			<li class="dropdown">
