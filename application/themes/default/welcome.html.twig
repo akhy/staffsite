@@ -29,6 +29,9 @@
 		a{
 			text-decoration: none;
 		}
+		a:hover{
+			text-decoration: none;
+		}
 		a.login{
 			background: #888;
 			color: white;
@@ -49,8 +52,10 @@
 </head>
 <body>
 
+	<a href="{{ site_url() }}">
 	{{ img({ 'src': 'img/uii.jpg', 'width': 100, 'class': 'logo1'}) }}
 	{{ img({ 'src': 'img/staffsite.png', 'class': 'logo2'}) }}
+	</a>
 	<hr>
 	<div id="avatars">
 		{% for staff in staffs %}
@@ -59,13 +64,15 @@
 	</div>
 
 	<div id="action">
-		{{ anchor('login', 'LOGIN', 'class="login"') }}
+		<input type="search" class="search-query span5" placeholder="Type keyword and press enter to search" style="text-align: center"/>
+		<hr>
 	</div>
 
 	<div id="footer">
 		Copyright © 2012 Program Studi Teknik Informatika - Universitas Islam Indonesia <br/>
 		Phone. +62 274 895287 | Fax. +62 274 895007 ext. 148 <br/>
 		Disclaimer | More info: informatika.fti@uii.ac.id <br/>
+		{{ anchor('login', 'STAFF LOGIN', '') }}
 	</div>
 	{{ js('lib/jquery/jquery-1.7.1.min.js') }}
 	{{ js('lib/bootstrap/js/bootstrap.min.js') }}
