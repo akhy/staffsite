@@ -18,6 +18,20 @@
 			<div class="span12">
 				<div id="header">
 				</div>
+				<div id="adminbar" class="navbar">
+					<div class="navbar-inner">
+						<ul class="nav">
+
+							<li id="userbar-dashboard"><a href="{{ site_url('admin') }}"><i class="icon-home"></i> Dashboard</a></li>
+							<li id="userbar-articles"><a href="{{ site_url('admin/articles') }}"><i class="icon-pencil"></i> Artikel Blog</a></li>
+							<li id="userbar-files"><a href="{{ site_url('admin/files') }}"><i class="icon-file"></i> File</a></li>
+							<li id="userbar-portfolios"><a href="{{ site_url('admin/portfolios') }}"><i class="icon-book"></i> Portofolio</a></li>
+
+							<li id="userbar-links"><a href="{{ site_url('admin/links') }}"><i class="icon-globe"></i> Link</a></li>
+						</ul>
+					</div>
+				</div>
+				
 				{% block content %}{% endblock %}
 				<div id="footer">
 					Copyright &copy; 2012 Program Studi Teknik Informatika - Universitas Islam Indonesia <br>	
