@@ -196,6 +196,7 @@ $config['twiggy']['register_functions'] = array
 	'tw_control', 'form_input', 'form_textarea', 'form_dropdown', 'form_password',
 	'dropdown',
 	'reset',
+	'time',
 );
 
 
